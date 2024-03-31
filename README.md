@@ -1,6 +1,10 @@
 # Sam's Bits
 Extra stuff that I want for the Create mod and Minecraft.
 
+## Assets
+
+- ATM from <https://www.planetminecraft.com/texture-pack/atm-3d-model/> made by JusteKal. (texture locations and colours changed)
+
 ## License
 
 Sam's Bits - Extra stuff that I want for the Create mod and Minecraft.

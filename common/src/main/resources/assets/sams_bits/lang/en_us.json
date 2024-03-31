@@ -1,0 +1,9 @@
+{
+  "sams_bits.gui.atm_screen.title": "ATM",
+  "block.sams_bits.atm": "ATM",
+  "itemGroup.sams_bits.main_group": "Sam's bits",
+  "item.sams_bits.copper_coin": "Copper Coin",
+  "item.sams_bits.iron_coin": "Iron Coin",
+  "item.sams_bits.gold_coin": "Gold Coin",
+  "item.sams_bits.emerald_coin": "Emerald Coin"
+}

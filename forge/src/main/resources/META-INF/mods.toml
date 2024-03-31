@@ -1,15 +1,15 @@
 modLoader = "javafml"
 loaderVersion = "[${forge_version},)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/ajh123/Sams-Bits/issues"
+license = "AGPL-3.0"
 
 [[mods]]
 modId = "sams_bits"
 version = "${version}"
-displayName = "Sams Bits"
-authors = "Me!"
+displayName = "Sam's Bits"
+authors = "Samuel Hulme"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Extra stuff that I want for the Create mod and Minecraft.
 '''
 logoFile = "icon.png"
 

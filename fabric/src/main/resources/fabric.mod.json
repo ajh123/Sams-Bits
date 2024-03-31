@@ -2,16 +2,17 @@
   "schemaVersion": 1,
   "id": "sams_bits",
   "version": "${version}",
-  "name": "Sams Bits",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Sam's Bits",
+  "description": "Extra stuff that I want for the Create mod and Minecraft.",
   "authors": [
-    "Me!"
+    "Samuel Hulme"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/ajh123/Sams-Bits",
+    "sources": "https://github.com/ajh123/Sams-Bits",
+    "issues": "https://github.com/ajh123/Sams-Bits/issues"
   },
-  "license": "Insert License Here",
+  "license": "AGPL-3.0",
   "icon": "assets/sams_bits/icon.png",
   "environment": "*",
   "entrypoints": {
