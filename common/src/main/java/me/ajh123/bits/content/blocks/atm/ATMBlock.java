@@ -1,12 +1,10 @@
-package me.ajh123.bits.blocks.atm;
+package me.ajh123.bits.content.blocks.atm;
 
-import com.simibubi.create.api.connectivity.ConnectivityHandler;
-import com.simibubi.create.content.logistics.vault.ItemVaultBlockEntity;
 import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.gui.ScreenOpener;
 import com.simibubi.create.foundation.item.ItemHelper;
 import com.tterrag.registrate.fabric.EnvExecutor;
-import me.ajh123.bits.registration.ModBlocks;
+import me.ajh123.bits.utilities.registration.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.player.LocalPlayer;

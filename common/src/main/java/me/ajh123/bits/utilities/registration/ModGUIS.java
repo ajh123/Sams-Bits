@@ -1,4 +1,4 @@
-package me.ajh123.bits.registration;
+package me.ajh123.bits.utilities.registration;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.simibubi.create.foundation.gui.UIRenderHelper;

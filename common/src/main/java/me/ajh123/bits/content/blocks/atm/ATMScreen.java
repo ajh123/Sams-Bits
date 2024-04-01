@@ -1,12 +1,12 @@
-package me.ajh123.bits.blocks.atm;
+package me.ajh123.bits.content.blocks.atm;
 
 import com.simibubi.create.foundation.gui.AbstractSimiScreen;
 import com.simibubi.create.foundation.gui.AllIcons;
 import com.simibubi.create.foundation.gui.element.GuiGameElement;
 import com.simibubi.create.foundation.gui.widget.IconButton;
-import me.ajh123.bits.registration.ModBlocks;
-import me.ajh123.bits.registration.ModGUIS;
-import me.ajh123.bits.util.Lang;
+import me.ajh123.bits.utilities.registration.ModBlocks;
+import me.ajh123.bits.utilities.registration.ModGUIS;
+import me.ajh123.bits.utilities.util.Lang;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

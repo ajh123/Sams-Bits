@@ -1,4 +1,4 @@
-package me.ajh123.bits;
+package me.ajh123.bits.utilities;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 
@@ -10,7 +10,7 @@ public class ExampleExpectPlatform {
      * platform sub-package, with its class suffixed with {@code Impl}.
      * <p>
      * Example:
-     * Expect: me.ajh123.bits.ExampleExpectPlatform#platformName()
+     * Expect: me.ajh123.bits.foundation.ExampleExpectPlatform#platformName()
      * Actual Fabric: me.ajh123.bits.fabric.ExampleExpectPlatformImpl#platformName()
      * Actual Forge: me.ajh123.bits.forge.ExampleExpectPlatformImpl#platformName()
      * <p>

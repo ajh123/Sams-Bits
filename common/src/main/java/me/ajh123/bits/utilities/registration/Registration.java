@@ -1,4 +1,4 @@
-package me.ajh123.bits.registration;
+package me.ajh123.bits.utilities.registration;
 
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import me.ajh123.bits.SamsBits;

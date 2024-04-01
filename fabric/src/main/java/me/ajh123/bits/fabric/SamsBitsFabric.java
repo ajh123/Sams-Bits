@@ -1,7 +1,7 @@
 package me.ajh123.bits.fabric;
 
 import io.github.fabricators_of_create.porting_lib.util.EnvExecutor;
-import me.ajh123.bits.registration.Registration;
+import me.ajh123.bits.utilities.registration.Registration;
 import me.ajh123.bits.SamsBits;
 import net.fabricmc.api.ModInitializer;
 

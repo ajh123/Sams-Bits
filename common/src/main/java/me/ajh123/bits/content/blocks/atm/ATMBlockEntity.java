@@ -1,4 +1,4 @@
-package me.ajh123.bits.blocks.atm;
+package me.ajh123.bits.content.blocks.atm;
 
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;

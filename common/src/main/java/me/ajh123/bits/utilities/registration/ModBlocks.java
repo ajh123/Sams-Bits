@@ -1,9 +1,10 @@
-package me.ajh123.bits.registration;
+package me.ajh123.bits.utilities.registration;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import me.ajh123.bits.SamsBits;
-import me.ajh123.bits.blocks.atm.*;
+import me.ajh123.bits.content.blocks.atm.ATMBlock;
+import me.ajh123.bits.content.blocks.atm.ATMBlockEntity;
 import net.minecraft.world.level.block.Blocks;
 
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;

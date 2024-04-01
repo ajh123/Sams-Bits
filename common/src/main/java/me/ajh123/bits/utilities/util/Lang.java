@@ -1,4 +1,4 @@
-package me.ajh123.bits.util;
+package me.ajh123.bits.utilities.util;
 
 import java.util.ArrayList;
 import java.util.List;
