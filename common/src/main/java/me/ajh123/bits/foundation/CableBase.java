@@ -14,21 +14,20 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
 public abstract class CableBase extends CrossCollisionBlock {
-	private final VoxelShape[] occlusionByIndex;
-	private final VoxelShape[] originalCollisionShapeByIndex;
-	private final VoxelShape[] originalShapeByIndex;
+	private final VoxelShape post = Block.box(6, 0, 6, 10, 4, 10);
+	private final VoxelShape side_north = Block.box(6, 0, 0, 10, 4, 9);
+	private final VoxelShape side_east = Block.box(7, 0, 6, 16, 4, 10);
+	private final VoxelShape side_south = Block.box(6, 0, 7, 10, 4, 16);
+	private final VoxelShape side_west = Block.box(0, 0, 6, 9, 4, 10);
+	private final VoxelShape vertical = Block.box(6, 0, 6, 10, 16, 10);
 	public static final BooleanProperty VERTICAL = BooleanProperty.create("vertical");
-
-	static float vertical_shape_f = 2.0F;
-	static float vertical_shape_g = 2.0F;
-	static float vertical_shape_h = 16.0F;
-	static float vertical_shape_i = 16.0F;
-	static float vertical_shape_j = 16.0F;
 
 	public CableBase(Properties properties) {
 		super(2.0F, 2.0F, 3.0F, 3.0F, 3.0F, properties);
@@ -40,20 +39,17 @@ public abstract class CableBase extends CrossCollisionBlock {
 				.setValue(VERTICAL, false)
 				.setValue(WATERLOGGED, false)
 		);
-		this.occlusionByIndex = this.makeShapes(2.0F, 1.0F, 3.0F, 3.0F, 3.0F);
-		this.originalCollisionShapeByIndex = collisionShapeByIndex.clone();
-		this.originalShapeByIndex = shapeByIndex.clone();
 	}
 
 	@Override
 	@ParametersAreNonnullByDefault
-	public VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
-		return this.occlusionByIndex[this.getAABBIndex(blockState)];
+	public @NotNull VoxelShape getOcclusionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+		return this.getShape(blockState, blockGetter, blockPos, CollisionContext.empty());
 	}
 
 	@Override
 	@ParametersAreNonnullByDefault
-	public VoxelShape getVisualShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+	public @NotNull VoxelShape getVisualShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
 		return this.getShape(blockState, blockGetter, blockPos, collisionContext);
 	}
 
@@ -91,7 +87,7 @@ public abstract class CableBase extends CrossCollisionBlock {
 
 	@Override
 	@ParametersAreNonnullByDefault
-	public BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
+	public @NotNull BlockState updateShape(BlockState blockState, Direction direction, BlockState blockState2, LevelAccessor levelAccessor, BlockPos blockPos, BlockPos blockPos2) {
 		if (blockState.getValue(WATERLOGGED)) {
 			levelAccessor.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelAccessor));
 		}
@@ -100,23 +96,31 @@ public abstract class CableBase extends CrossCollisionBlock {
 
 	@Override
 	@ParametersAreNonnullByDefault
-	public VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-		VoxelShape[] shape = this.originalShapeByIndex;
+	public @NotNull VoxelShape getShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+		VoxelShape shape = post;
 		if (blockState.getValue(VERTICAL)) {
-			shape = this.makeShapes(vertical_shape_f, vertical_shape_g, vertical_shape_h, 0.0F, vertical_shape_i);
+			shape = vertical;
 		}
-		return shape[this.getAABBIndex(blockState)];
+
+		if (blockState.getValue(NORTH)) {
+			shape = Shapes.or(shape, side_north);
+		}
+		if (blockState.getValue(EAST)) {
+			shape = Shapes.or(shape, side_east);
+		}
+		if (blockState.getValue(SOUTH)) {
+			shape = Shapes.or(shape, side_south);
+		}
+		if (blockState.getValue(WEST)) {
+			shape = Shapes.or(shape, side_west);
+		}
+		return shape;
 	}
 
 	@Override
 	@ParametersAreNonnullByDefault
-	public VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
-		VoxelShape[] shape = this.originalCollisionShapeByIndex;
-		if (blockState.getValue(VERTICAL)) {
-			shape = this.makeShapes(vertical_shape_f, vertical_shape_g, vertical_shape_h, 0.0F, vertical_shape_j);
-		}
-
-		return shape[this.getAABBIndex(blockState)];
+	public @NotNull VoxelShape getCollisionShape(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, CollisionContext collisionContext) {
+		return this.getShape(blockState, blockGetter, blockPos, collisionContext);
 	}
 
 	@Override
