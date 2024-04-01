@@ -1,7 +1,6 @@
 package me.ajh123.bits;
 
 import com.simibubi.create.Create;
-import me.ajh123.bits.utilities.ExampleExpectPlatform;
 import me.ajh123.bits.utilities.registration.Registration;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;

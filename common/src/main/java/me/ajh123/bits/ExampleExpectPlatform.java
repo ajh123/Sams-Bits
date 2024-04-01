@@ -1,4 +1,4 @@
-package me.ajh123.bits.utilities;
+package me.ajh123.bits;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 

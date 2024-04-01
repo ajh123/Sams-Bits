@@ -1,4 +1,5 @@
 {
+  "block.sams_bits.data_transfer_cable": "Data Transfer Cable",
   "sams_bits.gui.atm_screen.title": "ATM",
   "block.sams_bits.atm": "ATM",
   "itemGroup.sams_bits.main_group": "Sam's bits",

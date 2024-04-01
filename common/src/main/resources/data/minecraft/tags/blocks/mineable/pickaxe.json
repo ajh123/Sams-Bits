@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "sams_bits:atm"
+    "sams_bits:atm",
+    "sams_bits:data_transfer_cable"
   ]
 }

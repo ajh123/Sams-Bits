@@ -5,6 +5,7 @@ import com.tterrag.registrate.util.entry.BlockEntry;
 import me.ajh123.bits.SamsBits;
 import me.ajh123.bits.content.blocks.atm.ATMBlock;
 import me.ajh123.bits.content.blocks.atm.ATMBlockEntity;
+import me.ajh123.bits.content.blocks.data_transfer_cable.DataTransferCableBlock;
 import net.minecraft.world.level.block.Blocks;
 
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
@@ -19,6 +20,13 @@ public class ModBlocks {
 
 	public static final BlockEntityEntry<ATMBlockEntity> ATM_BLOCK_ENTITY = Registration.REGISTRATE.blockEntity("atm", ATMBlockEntity::new)
 			.validBlocks(ATM_BLOCK)
+			.register();
+
+	public static final BlockEntry<DataTransferCableBlock> DATA_TRANSFER_CABLE = Registration.REGISTRATE.block("data_transfer_cable", DataTransferCableBlock::new)
+			.initialProperties(() -> Blocks.IRON_BLOCK)
+			.properties(p -> p.strength(5f).requiresCorrectToolForDrops())
+			.simpleItem()
+			.transform(pickaxeOnly())
 			.register();
 
 	public static void init() {

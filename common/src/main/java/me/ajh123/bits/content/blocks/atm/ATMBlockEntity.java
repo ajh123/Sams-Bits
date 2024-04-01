@@ -1,9 +1,9 @@
 package me.ajh123.bits.content.blocks.atm;
 
-import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.inventory.VersionedInventoryWrapper;
 import io.github.fabricators_of_create.porting_lib.transfer.item.ItemStackHandler;
+import me.ajh123.bits.foundation.NetworkBlockEntity;
 import net.fabricmc.fabric.api.transfer.v1.item.ItemVariant;
 import net.fabricmc.fabric.api.transfer.v1.storage.Storage;
 import net.fabricmc.fabric.api.transfer.v1.storage.base.CombinedStorage;
@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ATMBlockEntity extends SmartBlockEntity implements SidedStorageBlockEntity {
+public class ATMBlockEntity extends NetworkBlockEntity implements SidedStorageBlockEntity {
 	protected Storage<ItemVariant> itemCapability;
 	protected ItemStackHandler inventory;
 
