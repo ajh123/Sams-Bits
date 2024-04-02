@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "sams_bits:block/bank_management_server",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "sams_bits:block/bank_management_server"
+    },
+    "facing=south": {
+      "model": "sams_bits:block/bank_management_server",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sams_bits:block/bank_management_server",
+      "y": 270
+    }
+  }
+}

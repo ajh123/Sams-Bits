@@ -5,6 +5,7 @@ import me.ajh123.bits.api.network.device.NetworkDevice;
 import me.ajh123.bits.api.network.device.NetworkInterface;
 import me.ajh123.bits.api.network.transfer.NetworkCable;
 import me.ajh123.bits.foundation.CableBase;
+import me.ajh123.bits.foundation.device.GenericDeviceBlock;
 import me.ajh123.bits.utilities.registration.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,7 +26,7 @@ public class DataTransferCableBlock extends CableBase implements NetworkCable {
 
 	@Override
 	public boolean connectsTo(BlockState blockState) {
-		return blockState.is(this) || blockState.is(ModBlocks.ATM_BLOCK.get());
+		return blockState.is(this) || blockState.getBlock() instanceof GenericDeviceBlock<?>;
 	}
 
 	@Override
