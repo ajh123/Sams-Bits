@@ -1,4 +1,5 @@
 {
+  "sams_bits.gui.bank_management.title": "Bank Management",
   "block.sams_bits.bank_management_server": "Bank Management Server",
   "block.sams_bits.bank_storage_server": "Bank Storage Server",
   "block.sams_bits.data_transfer_cable": "Data Transfer Cable",

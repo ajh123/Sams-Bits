@@ -17,11 +17,11 @@ import net.minecraft.resources.ResourceLocation;
  **/
 
 public enum ModGUIS implements ScreenElement {
-	ATM("atm", 255, 161),
+	ATM("atm", 254, 161),
+	TERMINAL("terminal", 406, 292),
 
 	;
 
-	public static final int FONT_COLOR = 0x575F7A;
 
 	public final ResourceLocation location;
 	public final int width;
@@ -29,19 +29,16 @@ public enum ModGUIS implements ScreenElement {
 	public final int startX;
 	public final int startY;
 
-	private ModGUIS(String location, int width, int height) {
+	ModGUIS(String location, int width, int height) {
 		this(location, 0, 0, width, height);
 	}
 
-	private ModGUIS(int startX, int startY) {
-		this("icons", startX * 16, startY * 16, 16, 16);
-	}
 
-	private ModGUIS(String location, int startX, int startY, int width, int height) {
+	ModGUIS(String location, int startX, int startY, int width, int height) {
 		this(SamsBits.MOD_ID, location, startX, startY, width, height);
 	}
 
-	private ModGUIS(String namespace, String location, int startX, int startY, int width, int height) {
+	ModGUIS(String namespace, String location, int startX, int startY, int width, int height) {
 		this.location = new ResourceLocation(namespace, "textures/gui/" + location + ".png");
 		this.width = width;
 		this.height = height;
