@@ -51,6 +51,10 @@ dependencies {
 
     // if you would like to add integration with JEI, uncomment this line.
 //    modCompileOnly("mezz.jei:jei-${minecraft_version}:${jei_version}:api")
+
+    modCompileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-core-api:${cct_version}")
+    modCompileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-forge-api:${cct_version}")
+    modLocalRuntime("cc.tweaked:cc-tweaked-${minecraft_version}-forge:${cct_version}")
 }
 
 processResources {
@@ -59,7 +63,8 @@ processResources {
             "version", version,
             "forge_version", forge_version.split("\\.")[0], // only specify major version of forge
             "minecraft_version", minecraft_version,
-            "create_version", create_forge_version.split("-")[0] // cut off build number
+            "create_version", create_forge_version.split("-")[0], // cut off build number
+            "cct_version", cct_version
     )
     properties.forEach((k, v) -> inputs.property(k, v))
 

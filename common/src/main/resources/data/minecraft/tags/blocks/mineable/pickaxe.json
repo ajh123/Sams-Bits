@@ -2,8 +2,6 @@
   "replace": false,
   "values": [
     "sams_bits:atm",
-    "sams_bits:data_transfer_cable",
-    "sams_bits:bank_storage_server",
     "sams_bits:bank_management_server"
   ]
 }

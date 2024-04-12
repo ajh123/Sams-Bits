@@ -33,3 +33,10 @@ mandatory=true
 versionRange="${create_version}"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.sams_bits]]
+modId="computercraft"
+mandatory=true
+versionRange="[${cct_version},)"
+ordering="NONE"
+side="BOTH"

@@ -1,5 +1,5 @@
 # Sam's Bits
-Extra stuff that I want for the Create mod and Minecraft.
+Extra stuff that I want for the Create mod, CC: Tweaked, and Minecraft.
 
 ## Assets
 

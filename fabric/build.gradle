@@ -66,6 +66,9 @@ dependencies {
 //    modCompileOnly("me.shedaniel:RoughlyEnoughItems-api-fabric:${rei_version}")
 //    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
 //    modCompileOnly("dev.emi:emi:${emi_version}")
+
+    modCompileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-fabric-api:${cct_version}")
+    modLocalRuntime("cc.tweaked:cc-tweaked-${minecraft_version}-fabric:${cct_version}")
 }
 
 processResources {
@@ -75,7 +78,8 @@ processResources {
             "fabric_loader_version", fabric_loader_version,
             "fabric_api_version", fabric_api_version,
             "minecraft_version", minecraft_version,
-            "create_version", create_fabric_version // on fabric, use the entire version, unlike forge
+            "create_version", create_fabric_version, // on fabric, use the entire version, unlike forge
+            "cct_version", cct_version
     )
     properties.forEach((k, v) -> inputs.property(k, v))
 

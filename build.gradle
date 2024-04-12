@@ -28,6 +28,12 @@ subprojects {
                 includeGroup("com.jozufozu.flywheel")
             }
         }
+        maven { // CC: Tweaked
+            url "https://squiddev.cc/maven/"
+            content {
+                includeGroup("cc.tweaked")
+            }
+        }
     }
 
     dependencies {
