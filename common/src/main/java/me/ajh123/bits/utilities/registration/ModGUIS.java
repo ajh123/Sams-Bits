@@ -61,4 +61,8 @@ public enum ModGUIS implements ScreenElement {
 		bind();
 		UIRenderHelper.drawColoredTexture(graphics, c, x, y, startX, startY, width, height);
 	}
+
+	public ResourceLocation getLocation() {
+		return location;
+	}
 }
