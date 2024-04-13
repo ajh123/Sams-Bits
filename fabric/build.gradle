@@ -67,6 +67,7 @@ dependencies {
 //    modCompileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-fabric:${rei_version}")
 //    modCompileOnly("dev.emi:emi:${emi_version}")
 
+    // Computer Craft
     modCompileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-fabric-api:${cct_version}")
     modLocalRuntime("cc.tweaked:cc-tweaked-${minecraft_version}-fabric:${cct_version}")
 }

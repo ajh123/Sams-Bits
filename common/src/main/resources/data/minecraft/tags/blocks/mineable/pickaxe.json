@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "sams_bits:atm",
-    "sams_bits:bank_management_server"
+    "sams_bits:atm"
   ]
 }

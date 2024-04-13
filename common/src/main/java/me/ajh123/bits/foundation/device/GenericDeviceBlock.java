@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class GenericDeviceBlock<E extends GenericDeviceBlockEntity> extends HorizontalDirectionalBlock implements IBE<E> {
+public abstract class GenericDeviceBlock<E extends BlockEntity> extends HorizontalDirectionalBlock implements IBE<E> {
 
 	protected GenericDeviceBlock(Properties properties) {
 		super(properties);
@@ -57,18 +57,4 @@ public abstract class GenericDeviceBlock<E extends GenericDeviceBlockEntity> ext
 	@Override
 	public abstract BlockEntityType<? extends E> getBlockEntityType();
 
-	@SuppressWarnings("deprecation") // calling this method is not recommended, but overriding is recommended.
-	@Override
-	public void onRemove(BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean pIsMoving) {
-		if (state.hasBlockEntity() && (state.getBlock() != newState.getBlock() || !newState.hasBlockEntity())) {
-			BlockEntity be = world.getBlockEntity(pos);
-			Class<E> clazz = this.getBlockEntityClass();
-			if (!clazz.isInstance(be))
-				return;
-			E gbe = clazz.cast(be);
-			ItemHelper.dropContents(world, pos, gbe.inventory);
-			gbe.onRemove();
-			world.removeBlockEntity(pos);
-		}
-	}
 }
