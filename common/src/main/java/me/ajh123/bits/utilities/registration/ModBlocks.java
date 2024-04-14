@@ -2,7 +2,6 @@ package me.ajh123.bits.utilities.registration;
 
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import com.tterrag.registrate.util.entry.BlockEntry;
-import dan200.computercraft.shared.computer.items.ComputerItem;
 import me.ajh123.bits.SamsBits;
 import me.ajh123.bits.content.blocks.atm.ATMBlock;
 import me.ajh123.bits.content.blocks.atm.ATMBlockEntity;
@@ -27,7 +26,7 @@ public class ModBlocks {
 	public static final BlockEntry<BankManagementServerBlock> BANK_MANAGEMENT_SERVER_BLOCK = Registration.REGISTRATE.block("bank_management_server", BankManagementServerBlock::new)
 			.initialProperties(() -> Blocks.IRON_BLOCK)
 			.properties(p -> p.strength(5f))
-			.item(ComputerItem::new).build()
+			.simpleItem()
 			.register();
 
 	public static final BlockEntityEntry<BankManagementServerBlockEntity> BANK_MANAGEMENT_SERVER_BLOCK_ENTITY = Registration.REGISTRATE.blockEntity("bank_management_server", BankManagementServerBlockEntity::new)

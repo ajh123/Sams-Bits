@@ -1,8 +1,6 @@
 package me.ajh123.bits;
 
 import com.simibubi.create.Create;
-import dan200.computercraft.shared.ModRegistry;
-import me.ajh123.bits.content.blocks.bank_management_server.BankManagementServerBlock;
 import me.ajh123.bits.utilities.registration.Registration;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
@@ -19,9 +17,6 @@ public class SamsBits {
         Registration.init(); // hold registrate in a separate class to avoid loading early on forge
     }
 
-    public static void postInit() {
-        BankManagementServerBlock.REGISTRY_ENTRY.register();
-    }
 
     public static ResourceLocation modLoc(String path) {
         return new ResourceLocation(MOD_ID, path);

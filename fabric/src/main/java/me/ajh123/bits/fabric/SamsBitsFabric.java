@@ -19,7 +19,6 @@ public class SamsBitsFabric implements ModInitializer {
                 ), SamsBits.NAME);
         // on fabric, Registrates must be explicitly finalized and registered.
         Registration.REGISTRATE.register();
-        SamsBits.postInit();
 
         var peripherals = ModPeripherals.getPeripherals();
         var keys = peripherals.keySet();

@@ -20,7 +20,6 @@ public class SamsBitsForge {
     }
 
     private void onCommonSetup(FMLCommonSetupEvent event) {
-        SamsBits.postInit();
         ForgeComputerCraftAPI.registerPeripheralProvider(new ForgePeripheralProvider());
     }
 }
