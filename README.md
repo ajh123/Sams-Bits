@@ -1,6 +1,8 @@
 # Sam's Bits
 
-Extra stuff that I want for the mods I use.
+Here's a description for your mod:
+
+**Sam's Bits** is a personal Minecraft mod designed to add random extensions to other mods. Currently, it features the **Crayfish Energy Transformer**, a tool that converts Forge Energy into the energy system used by the MrCrayfish Furniture Mod Refurbished. While the mod was originally created for personal use, it is publicly available, and more features are planned for future updates. Stay tuned as this mod continues to grow with more unique integrations and utilities!
 
 ## License
 
