@@ -183,6 +183,7 @@ dependencies {
     compileOnly fg.deobf("com.mrcrayfish:refurbished_furniture-common:${minecraft_version}-${refurbished_furniture_version}")
     runtimeOnly fg.deobf("com.mrcrayfish:refurbished_furniture-forge:${minecraft_version}-${refurbished_furniture_version}")
     runtimeOnly fg.deobf("com.mrcrayfish:framework-forge:${minecraft_version}-${framework_version}")
+    compileOnly fg.deobf("blank:oc2r-${minecraft_version}:${oc2r_version}")
     runtimeOnly fg.deobf("blank:oc2r-${minecraft_version}:${oc2r_version}")
     runtimeOnly fg.deobf("blank:sedna-${minecraft_version}:${sedna_version}")
     runtimeOnly fg.deobf("blank:markdown_manual-MC${minecraft_version}:${markdown_manual_version}")
@@ -196,6 +197,7 @@ dependencies {
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
                              refurbished_furniture_version: refurbished_furniture_version, refurbished_furniture_version_range: refurbished_furniture_version_range,
+                             oc2r_version_range : oc2r_version_range,
                              forge_version       : forge_version, forge_version_range: forge_version_range,
                              loader_version_range: loader_version_range,
                              mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,

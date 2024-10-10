@@ -67,3 +67,9 @@ mandatory = true
 versionRange = "${refurbished_furniture_version_range}"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies."${mod_id}"]]
+modId = "oc2r"
+mandatory = true
+versionRange = "${oc2r_version_range}"
+ordering = "NONE"
+side = "BOTH"

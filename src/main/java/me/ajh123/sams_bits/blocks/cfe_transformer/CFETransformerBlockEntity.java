@@ -1,13 +1,11 @@
 package me.ajh123.sams_bits.blocks.cfe_transformer;
 
 import com.mrcrayfish.furniture.refurbished.blockentity.ElectricitySourceBlockEntity;
-import com.mrcrayfish.furniture.refurbished.electricity.Connection;
 import me.ajh123.sams_bits.Config;
 import me.ajh123.sams_bits.content.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.IntTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
