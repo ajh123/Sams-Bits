@@ -70,7 +70,6 @@ public class CFETransformerBlockEntity extends ElectricitySourceBlockEntity {
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
         boolean powered = false;
-        boolean destinationPowered = false;
         if (!level.isClientSide) {
             BlockEntity entity = level.getBlockEntity(blockPos);
             if (entity instanceof  CFETransformerBlockEntity cfeEntity) {
@@ -81,14 +80,7 @@ public class CFETransformerBlockEntity extends ElectricitySourceBlockEntity {
                     level.setBlockAndUpdate(blockPos, blockState.setValue(CFETransformerBlock.POWERED, false));
                 }
 
-                for (Connection connection : cfeEntity.connections) {
-                    if (connection.isPowered(level)) {
-                        destinationPowered = true;
-                        break;
-                    }
-                }
-
-                if (powered && destinationPowered) {
+                if (powered) {
                     cfeEntity.energyStorage.extractEnergy(Config.CFEExtrationRate, false);
                 }
             }

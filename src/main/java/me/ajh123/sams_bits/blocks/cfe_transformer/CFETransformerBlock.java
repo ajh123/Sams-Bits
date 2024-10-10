@@ -55,8 +55,6 @@ public class CFETransformerBlock extends Block implements EntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        // Check if the block should be powered when placed
-        boolean shouldPower = context.getLevel().hasNeighborSignal(context.getClickedPos());
-        return this.defaultBlockState().setValue(POWERED, shouldPower);
+        return this.defaultBlockState().setValue(POWERED, false);
     }
 }
