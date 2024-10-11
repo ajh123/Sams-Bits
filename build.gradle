@@ -21,10 +21,6 @@ apply plugin: 'org.spongepowered.mixin'
 group = mod_group_id
 version = mod_version
 
-configurations { 
-    localDeps.extendsFrom(runtimeOnly)
-}
-
 base {
     archivesName = mod_id
 }
@@ -190,8 +186,8 @@ dependencies {
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     compileOnly fg.deobf("com.mrcrayfish:refurbished_furniture-common:${minecraft_version}-${refurbished_furniture_version}")
-    localDeps fg.deobf("com.mrcrayfish:refurbished_furniture-forge:${minecraft_version}-${refurbished_furniture_version}")
-    localDeps fg.deobf("com.mrcrayfish:framework-forge:${minecraft_version}-${framework_version}")
+    runtimeOnly fg.deobf("com.mrcrayfish:refurbished_furniture-forge:${minecraft_version}-${refurbished_furniture_version}")
+    runtimeOnly fg.deobf("com.mrcrayfish:framework-forge:${minecraft_version}-${framework_version}")
     compileOnly fg.deobf("blank:oc2r-${minecraft_version}:${oc2r_version}")
     runtimeOnly fg.deobf("blank:oc2r-${minecraft_version}:${oc2r_version}")
     runtimeOnly fg.deobf("blank:sedna-${minecraft_version}:${sedna_version}")
@@ -259,11 +255,12 @@ artifacts {
 
 task copyToMods(type: Exec) {
     dependsOn("reobfJar")
-    copy {
-        into "./run/mods"
-        from configurations.localDeps
-        exclude "*mapped_offical*.jar"
-    }
+    // copy {
+    //     into "./run/mods"
+    //     from configurations.runtimeClasspath
+    //     include "*.jar"
+    //     exclude "*mapped_offical*.jar"
+    // }
     copy {
         from "build/libs"
         into "./run/mods/"
