@@ -1,0 +1,1 @@
+python -m portablemc --work-dir ./run --main-dir ./run start forge:1.20.1-latest
