@@ -73,3 +73,9 @@ mandatory = true
 versionRange = "${oc2r_version_range}"
 ordering = "NONE"
 side = "BOTH"
+[[dependencies."${mod_id}"]]
+modId = "computercraft"
+mandatory = true
+versionRange = "${cct_version_range}"
+ordering = "NONE"
+side = "BOTH"

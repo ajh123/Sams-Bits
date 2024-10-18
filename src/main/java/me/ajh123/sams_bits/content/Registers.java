@@ -20,7 +20,7 @@ public class Registers {
 
     public static final RegistryObject<CreativeModeTab> CREATIVE_TAB = CREATIVE_MODE_TABS.register("main_tab", () -> CreativeModeTab.builder()
     .title(Component.translatable("itemGroup." + SamsBits.MODID + ".main_tab"))
-    .icon(() -> ModItems.SEDNA_IMPROVED_HARD_DRIVE.get().getDefaultInstance())
+    .icon(() -> ModBlocks.CFE_TRANSFORMER_ITEM.get().getDefaultInstance())
     .displayItems((parameters, output) -> {
         for (RegistryObject<Block> block : BLOCKS.getEntries()) {
             output.accept(block.get().asItem());
@@ -32,7 +32,6 @@ public class Registers {
 
 
     public static void register(IEventBus modEventBus) {
-        ModComputerData.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);

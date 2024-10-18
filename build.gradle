@@ -158,6 +158,12 @@ repositories {
             content { includeGroup group }
         }
     }
+    maven {
+        url = uri("https://maven.squiddev.cc")
+        content {
+            includeGroup("cc.tweaked")
+        }
+    }
 }
 
 dependencies {
@@ -195,6 +201,9 @@ dependencies {
     runtimeOnly fg.deobf("blank:markdown_manual-MC${minecraft_version}:${markdown_manual_version}")
     runtimeOnly fg.deobf("blank:architectury:${architectury_version}")
     implementation("me.ajh123.sedna_improved:sedna-buildroot:2.0") { transitive = false }
+    compileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-core-api:${cct_version}")
+    compileOnly(fg.deobf("cc.tweaked:cc-tweaked-${minecraft_version}-forge-api:${cct_version}"))
+    runtimeOnly(fg.deobf("cc.tweaked:cc-tweaked-${minecraft_version}-forge:${cct_version}"))
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -204,7 +213,8 @@ dependencies {
 tasks.named('processResources', ProcessResources).configure {
     var replaceProperties = [minecraft_version   : minecraft_version, minecraft_version_range: minecraft_version_range,
                              refurbished_furniture_version: refurbished_furniture_version, refurbished_furniture_version_range: refurbished_furniture_version_range,
-                             oc2r_version_range : oc2r_version_range,
+                             oc2r_version_range  : oc2r_version_range,
+                             cct_version_range   : cct_version_range, cct_version: cct_version,
                              forge_version       : forge_version, forge_version_range: forge_version_range,
                              loader_version_range: loader_version_range,
                              mod_id              : mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
