@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"1": "sams_bits:block/light_ceiling_light_panel"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 13],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 14]},
+			"faces": {
+				"north": {"uv": [0.75, 0.75, 4.75, 4.75], "texture": "#1"},
+				"east": {"uv": [0, 0.75, 0.75, 4.75], "texture": "#1"},
+				"south": {"uv": [5.5, 0.75, 9.5, 4.75], "texture": "#1"},
+				"west": {"uv": [4.75, 0.75, 5.5, 4.75], "texture": "#1"},
+				"up": {"uv": [4.75, 0.75, 0.75, 0], "texture": "#1"},
+				"down": {"uv": [8.75, 0, 4.75, 0.75], "texture": "#1"}
+			}
+		}
+	],
+	"display": {}
+}
