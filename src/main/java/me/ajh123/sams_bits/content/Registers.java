@@ -1,5 +1,6 @@
 package me.ajh123.sams_bits.content;
 
+import me.ajh123.sams_bits.ItemExtras;
 import me.ajh123.sams_bits.SamsBits;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -23,10 +24,14 @@ public class Registers {
     .icon(() -> ModBlocks.CFE_TRANSFORMER_ITEM.get().getDefaultInstance())
     .displayItems((parameters, output) -> {
         for (RegistryObject<Block> block : BLOCKS.getEntries()) {
-            output.accept(block.get().asItem());
+            if (!ItemExtras.isHiddenInCreative(block.get().asItem())) {
+                output.accept(block.get().asItem());
+            }
         }
         for (RegistryObject<Item> item : ITEMS.getEntries()) {
-            output.accept(item.get());
+            if (!ItemExtras.isHiddenInCreative(item.get())) {
+                output.accept(item.get());
+            }
         }
     }).build());
 
