@@ -2,5 +2,6 @@
   "block.sams_bits.cfe_transformer": "Crayfish Energy Transformer",
   "block.sams_bits.light_ceiling_light_panel": "Light Ceiling Light Panel",
   "block.sams_bits.dark_ceiling_light_panel": "Dark Ceiling Light Panel",
-  "itemGroup.sams_bits.main_tab": "Sam's Bits"
+  "itemGroup.sams_bits.main_tab": "Sam's Bits",
+  "options.sams_bits.operatorItems": "[Sam's Bits] Show operator items"
 }

@@ -5,10 +5,14 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "sams_bits.refmap.json",
   "mixins": [
+    "CreativeModeTabMixin",
     "ItemMixin",
     "ItemPropertiesMixin"
   ],
   "client": [
+    "ControlsScreenMixin",
+    "OptionsMixin",
+    "ScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
