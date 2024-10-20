@@ -1,9 +1,14 @@
 package me.ajh123.sams_bits.blocks.advanced_network_switch;
 
+import imgui.ImGui;
+import imgui.type.ImBoolean;
 import li.cil.oc2r.common.blockentity.NetworkHubBlockEntity;
 import me.ajh123.sams_bits.content.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -14,7 +19,10 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
+import xyz.breadloaf.imguimc.Imguimc;
+import xyz.breadloaf.imguimc.interfaces.Renderable;
 
 import javax.annotation.Nullable;
 
@@ -52,5 +60,33 @@ public class AdvancedNetworkSwitchBlock extends HorizontalDirectionalBlock imple
     protected void createBlockStateDefinition(final StateDefinition.@NotNull Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(FACING);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
+        windowOpen.set(true);
+        Imguimc.pushRenderable(window);
+        return InteractionResult.SUCCESS;
+    }
+
+    private static final ImBoolean windowOpen = new ImBoolean(false);
+    private static final SwitchScreenRenderable window = new SwitchScreenRenderable();
+
+    public static class SwitchScreenRenderable implements Renderable {
+
+        @Override
+        public String getName() {
+            return "Advanced Network Switch";
+        }
+
+        @Override
+        public void render() {
+            ImGui.showDemoWindow(windowOpen);
+
+            if (!windowOpen.get()) {
+                Imguimc.pullRenderable(this);
+            }
+        }
     }
 }

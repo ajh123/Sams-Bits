@@ -13,7 +13,6 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 apply plugin: 'org.spongepowered.mixin'
@@ -28,6 +27,8 @@ base {
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(17)
 }
+
+jarJar.enable()
 
 minecraft {
     // The mappings can be changed at any time and must be in the following format.
@@ -191,6 +192,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    // Library mods
     compileOnly fg.deobf("com.mrcrayfish:refurbished_furniture-common:${minecraft_version}-${refurbished_furniture_version}")
     runtimeOnly fg.deobf("com.mrcrayfish:refurbished_furniture-forge:${minecraft_version}-${refurbished_furniture_version}")
     runtimeOnly fg.deobf("com.mrcrayfish:framework-forge:${minecraft_version}-${framework_version}")
@@ -200,10 +202,25 @@ dependencies {
     compileOnly fg.deobf("blank:sedna-${minecraft_version}:${sedna_version}")
     runtimeOnly fg.deobf("blank:markdown_manual-MC${minecraft_version}:${markdown_manual_version}")
     runtimeOnly fg.deobf("blank:architectury:${architectury_version}")
-    implementation("me.ajh123.sedna_improved:sedna-buildroot:2.0") { transitive = false }
     compileOnly("cc.tweaked:cc-tweaked-${minecraft_version}-core-api:${cct_version}")
     compileOnly(fg.deobf("cc.tweaked:cc-tweaked-${minecraft_version}-forge-api:${cct_version}"))
     runtimeOnly(fg.deobf("cc.tweaked:cc-tweaked-${minecraft_version}-forge:${cct_version}"))
+
+    // Non-mod libraries
+    minecraftLibrary ("me.ajh123.sedna_improved:sedna-buildroot:2.0") { transitive = false }
+    jarJar ("me.ajh123.sedna_improved:sedna-buildroot:[2.0,)")
+
+    minecraftLibrary ("io.github.spair:imgui-java-binding:${imguiVersion}") { transitive = false }
+    jarJar ("io.github.spair:imgui-java-binding:[${imguiVersion},)")
+    minecraftLibrary ("io.github.spair:imgui-java-lwjgl3:${imguiVersion}") { transitive = false }
+    jarJar ("io.github.spair:imgui-java-lwjgl3:[${imguiVersion},)")
+
+    minecraftLibrary ("io.github.spair:imgui-java-natives-windows:${imguiVersion}") { transitive = false }
+    jarJar ("io.github.spair:imgui-java-natives-windows:[${imguiVersion},)")
+    minecraftLibrary ("io.github.spair:imgui-java-natives-linux:${imguiVersion}") { transitive = false }
+    jarJar ("io.github.spair:imgui-java-natives-linux:[${imguiVersion},)")
+    minecraftLibrary ("io.github.spair:imgui-java-natives-macos:${imguiVersion}") { transitive = false }
+    jarJar ("io.github.spair:imgui-java-natives-macos:[${imguiVersion},)")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -239,24 +256,6 @@ jar {
                     "Implementation-Vendor"   : mod_authors,
                     "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")])
     }
-}
-
-shadowJar {
-    finalizedBy 'reobfJar'
-
-    dependencies {
-        include(dependency('me.ajh123.sedna_improved:sedna-buildroot:.*'))
-    }
-
-    archiveClassifier.set('')
-}
-
-reobf {
-    shadowJar {}
-}
-
-artifacts {
-    archives shadowJar
 }
 
 tasks.withType(JavaCompile).configureEach {

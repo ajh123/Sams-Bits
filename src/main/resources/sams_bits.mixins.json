@@ -9,6 +9,8 @@
     "ItemPropertiesMixin"
   ],
   "client": [
+    "imguimc.GLFWInitMixin",
+    "imguimc.TailRenderMixin"
   ],
   "injectors": {
     "defaultRequire": 1
