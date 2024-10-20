@@ -20,4 +20,10 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-For more information view the full [LICENSE](./LICENSE).
+For more information view the full [./LICENSE](./LICENSE).
+
+### Acknowledgements
+
+Some portions of this mod contains code or resources from other mods:
+
+- Advanced Network Switch Block / Block Entity, uses code form the [oc2r](https://github.com/North-Western-Development/oc2r) Network Switch Block / Block Entity, at commit `ce4e4de6ed6e37ace2e9112732eed418074e74e8`. See [./LICENSE-OC2R](./LICENSE-OC2R) for more.
