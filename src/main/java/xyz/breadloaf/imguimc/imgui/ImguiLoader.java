@@ -1,8 +1,7 @@
 package xyz.breadloaf.imguimc.imgui;
 
 import imgui.*;
-import imgui.flag.ImGuiCol;
-import imgui.flag.ImGuiConfigFlags;
+import imgui.flag.*;
 import imgui.gl3.ImGuiImplGl3;
 import imgui.glfw.ImGuiImplGlfw;
 import xyz.breadloaf.imguimc.Imguimc;
@@ -11,15 +10,15 @@ import xyz.breadloaf.imguimc.interfaces.Renderable;
 import static org.lwjgl.glfw.GLFW.*;
 
 public class ImguiLoader {
-    private static final ImGuiImplGlfw imGuiGlfw = new ImGuiImplGlfw();
+    public static final ImGuiImplGlfw imGuiGlfw = new ImGuiImplGlfw();
 
-    private static final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
+    public static final ImGuiImplGl3 imGuiGl3 = new ImGuiImplGl3();
 
     private static long windowHandle;
 
     public static void onGlfwInit(long handle) {
         initializeImGui(handle);
-        imGuiGlfw.init(handle,true);
+        imGuiGlfw.init(handle,false);
         imGuiGl3.init();
         windowHandle = handle;
     }
@@ -32,15 +31,29 @@ public class ImguiLoader {
         //user render code
 
         for (Renderable renderable: Imguimc.renderstack) {
+            Imguimc.MINECRAFT.mouseHandler.releaseMouse();
             Imguimc.MINECRAFT.getProfiler().push("ImGui Render/"+renderable.getName());
             renderable.render();
             Imguimc.MINECRAFT.getProfiler().pop();
+        }
+
+        if (Imguimc.renderstack.isEmpty()) {
+            if (Imguimc.MINECRAFT.screen == null) {
+                if (!Imguimc.MINECRAFT.mouseHandler.isMouseGrabbed()) {
+                    Imguimc.MINECRAFT.mouseHandler.grabMouse();
+                }
+            }
         }
 
         //end of user code
 
         ImGui.render();
         endFrame(windowHandle);
+
+        for (Renderable renderable : Imguimc.toRemove) {
+            Imguimc.pullRenderable(renderable);
+        }
+        Imguimc.toRemove.clear();
     }
 
     private static void initializeImGui(long glHandle) {

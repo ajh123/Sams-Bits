@@ -2,6 +2,7 @@ package me.ajh123.sams_bits.blocks.advanced_network_switch;
 
 import imgui.ImGui;
 import imgui.type.ImBoolean;
+import imgui.type.ImString;
 import li.cil.oc2r.common.blockentity.NetworkHubBlockEntity;
 import me.ajh123.sams_bits.content.ModBlocks;
 import net.minecraft.core.BlockPos;
@@ -65,8 +66,12 @@ public class AdvancedNetworkSwitchBlock extends HorizontalDirectionalBlock imple
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
-        windowOpen.set(true);
-        Imguimc.pushRenderable(window);
+        if (level.isClientSide) {
+            windowOpen.set(true);
+            if (!windowOpen.get()) {
+                Imguimc.pushRenderable(window);
+            }
+        }
         return InteractionResult.SUCCESS;
     }
 
@@ -82,10 +87,14 @@ public class AdvancedNetworkSwitchBlock extends HorizontalDirectionalBlock imple
 
         @Override
         public void render() {
-            ImGui.showDemoWindow(windowOpen);
+            ImString string = new ImString();
+            ImGui.begin(getName(), windowOpen);
+            ImGui.text("AAAAAAAA");
+            ImGui.inputText("Test", string);
+            ImGui.end();
 
             if (!windowOpen.get()) {
-                Imguimc.pullRenderable(this);
+                Imguimc.toRemove.add(this);
             }
         }
     }

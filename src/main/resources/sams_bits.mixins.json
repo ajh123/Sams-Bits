@@ -6,10 +6,13 @@
   "refmap": "sams_bits.refmap.json",
   "mixins": [
     "ItemMixin",
-    "ItemPropertiesMixin"
+    "ItemPropertiesMixin",
+    "MinecraftMixin"
   ],
   "client": [
     "imguimc.GLFWInitMixin",
+    "imguimc.KeyboardHandlerMixin",
+    "imguimc.MouseHandlerMixin",
     "imguimc.TailRenderMixin"
   ],
   "injectors": {
