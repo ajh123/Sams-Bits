@@ -28,7 +28,7 @@ public class ModBlocks {
     public static final RegistryObject<PoweredItem> DARK_CEILING_LIGHT_PANEL_ITEM = Registers.ITEMS.register("dark_ceiling_light_panel", () -> new PoweredItem(DARK_CEILING_LIGHT_PANEL_BLOCK.get(), ItemExtras.hideItem(new Item.Properties())));
 
     public static final RegistryObject<AdvancedNetworkSwitchBlock> ADVANCED_NETWORK_SWITCH_BLOCK = Registers.BLOCKS.register("advanced_network_switch", AdvancedNetworkSwitchBlock::new);
-    public static final RegistryObject<BlockItem> ADVANCED_NETWORK_SWITCH_ITEM = Registers.ITEMS.register("advanced_network_switch", () -> new BlockItem(ADVANCED_NETWORK_SWITCH_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<BlockItem> ADVANCED_NETWORK_SWITCH_ITEM = Registers.ITEMS.register("advanced_network_switch", () -> new BlockItem(ADVANCED_NETWORK_SWITCH_BLOCK.get(), ItemExtras.hideItem(new Item.Properties())));
     public static final RegistryObject<BlockEntityType<AdvancedNetworkSwitchBlockEntity>> ADVANCED_NETWORK_SWITCH_BLOCK_ENTITY = Registers.BLOCK_ENTITIES.register("advanced_network_switch",  () -> BlockEntityType.Builder.of(AdvancedNetworkSwitchBlockEntity::new, ADVANCED_NETWORK_SWITCH_BLOCK.get()).build(null));
 
 
