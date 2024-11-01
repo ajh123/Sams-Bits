@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "": {
-      "model": "sams_bits:block/cfe_transformer"
-    }
-  }
-}

@@ -1,8 +1,4 @@
 {
-  "block.sams_bits.cfe_transformer": "Crayfish Energy Transformer",
-  "block.sams_bits.light_ceiling_light_panel": "Light Ceiling Light Panel",
-  "block.sams_bits.dark_ceiling_light_panel": "Dark Ceiling Light Panel",
-  "block.sams_bits.advanced_network_switch": "Advanced Network Switch",
-  "itemGroup.sams_bits.main_tab": "Sam's Bits",
-  "options.sams_bits.operatorItems": "[Sam's Bits] Show operator items"
+  "itemGroup.sams_bits": "Sam's Bits",
+  "item.sams_bits.train_schedule": "Train Schedule"
 }

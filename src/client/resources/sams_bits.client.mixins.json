@@ -1,9 +1,9 @@
 {
 	"required": true,
-	"package": "me.ajh123.sams_bits.mixin",
+	"package": "me.ajh123.sams_bits.mixin.client",
 	"compatibilityLevel": "JAVA_21",
-	"mixins": [
-      "EntityMixin"
+	"client": [
+		"ExampleClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

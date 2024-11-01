@@ -1,0 +1,43 @@
+{
+	"schemaVersion": 1,
+	"id": "sams_bits",
+	"version": "${version}",
+	"name": "Sam's Bits",
+	"description": "**Sam's Bits** is a personal Minecraft mod designed to add random extensions to other mods.",
+	"authors": [
+		"ajh123 (samuelh2005)"
+	],
+	"contact": {
+		"homepage": "https://github.com/ajh123/Sams-Bits/",
+		"sources": "https://github.com/ajh123/Sams-Bits/",
+		"issues": "https://github.com/ajh123/Sams-Bits/issues"
+	},
+	"license": "GPL-3",
+	"icon": "assets/sams_bits/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"me.ajh123.sams_bits.SamsBits"
+		],
+		"client": [
+			"me.ajh123.sams_bits.SamsBitsClient"
+		],
+		"fabric-datagen": [
+			"me.ajh123.sams_bits.SamsBitsDataGenerator"
+		]
+	},
+	"mixins": [
+		"sams_bits.mixins.json",
+		{
+			"config": "sams_bits.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.8",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*",
+		"polymer-bundled": "${polymer_core_version}"
+	}
+}
