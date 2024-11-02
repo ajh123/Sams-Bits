@@ -19,7 +19,7 @@ public class EntityMixin {
 		ItemStack heldItem = player.getStackInHand(hand);
 
 		if (heldItem.getItem() instanceof UseOnEntityEvent event) {
-			cir.setReturnValue(event.useOnAnyEntity(player.getWorld(), (Entity) (Object) this, player));
+			cir.setReturnValue(event.useOnAnyEntity(player.getWorld(), (Entity) (Object) this, player, heldItem, hand));
 		}
 	}
 }
