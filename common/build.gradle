@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+version = project.common_version
+group = project.maven_group
+
+base {
+    archivesName = project.common_archives_base_name
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}

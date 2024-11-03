@@ -1,6 +1,5 @@
 package me.ajh123.sams_bits;
 
-import me.ajh123.sams_bits.api.permissions.PermissionContainer;
 import me.lucko.fabric.api.permissions.v0.OfflinePermissionCheckEvent;
 import me.lucko.fabric.api.permissions.v0.PermissionCheckEvent;
 import net.fabricmc.api.ModInitializer;

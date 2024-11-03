@@ -30,7 +30,7 @@ bin/
 
 # fabric
 
-run/
+minecraft_common/run/
 
 # java
 
