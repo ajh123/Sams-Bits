@@ -44,10 +44,11 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Polymer
+	// Libraries
 	modImplementation include("eu.pb4:polymer-core:${polymer_core_version}")
 	modRuntimeOnly include("eu.pb4:polymer-bundled:${polymer_core_version}")
 	modImplementation include("eu.pb4:sgui:${sgui_version}")
+	include(modImplementation("me.lucko:fabric-permissions-api:${fabric_permissions_api_version}"))
 }
 
 processResources {
