@@ -1,4 +1,6 @@
 {
   "itemGroup.sams_bits": "Sam's Bits",
-  "item.sams_bits.train_schedule": "Train Schedule"
+  "item.sams_bits.train_schedule": "Train Schedule",
+  "entity.sams_bits.vehicle": "Vehicle",
+  "item.sams_bits.vehicle": "Vehicle"
 }

@@ -1,6 +1,5 @@
 package me.ajh123.sams_bits.content;
 
-import me.ajh123.sams_bits.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Item;

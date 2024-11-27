@@ -1,16 +1,11 @@
 package me.ajh123.sams_bits;
 
-import me.lucko.fabric.api.permissions.v0.OfflinePermissionCheckEvent;
-import me.lucko.fabric.api.permissions.v0.PermissionCheckEvent;
+import me.ajh123.sams_bits.content.ModEntities;
+import me.ajh123.sams_bits.content.ModItems;
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.util.TriState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayerEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.CompletableFuture;
 
 public class SamsBits implements ModInitializer {
 	public static final String MOD_ID = "sams_bits";
@@ -20,6 +15,7 @@ public class SamsBits implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Initializing content ...");
+		ModEntities.initialize();
 		ModItems.initialize();
 
 //		PermissionCheckEvent.EVENT.register((source, permission) -> {
