@@ -1,4 +1,4 @@
-package me.ajh123.sams_bits.content.entities;
+package me.ajh123.sams_bits.content.vehicles;
 
 import me.ajh123.sams_bits.content.ModItems;
 import net.minecraft.entity.*;

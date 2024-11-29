@@ -1,9 +1,12 @@
 package me.ajh123.sams_bits.content;
 
+import java.util.Map.Entry;
+
 import eu.pb4.polymer.core.api.item.PolymerItemGroupUtils;
 import me.ajh123.sams_bits.SamsBits;
-import me.ajh123.sams_bits.content.items.TrainSchedule;
-import me.ajh123.sams_bits.content.items.VehicleEntitySpawner;
+import me.ajh123.sams_bits.content.other.TrainSchedule;
+import me.ajh123.sams_bits.content.roads.RoadConnectorItem;
+import me.ajh123.sams_bits.content.vehicles.VehicleEntitySpawner;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -15,8 +18,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-    public static TrainSchedule TRAIN_SCHEDULE = new TrainSchedule(new Item.Settings());
-    public static VehicleEntitySpawner VEHICLE_ENTITY_SPAWNER = new VehicleEntitySpawner(new Item.Settings());
+    public static TrainSchedule TRAIN_SCHEDULE = register("train_schedule", new TrainSchedule(new Item.Settings()));
+    public static VehicleEntitySpawner VEHICLE_ENTITY_SPAWNER = register("vehicle", new VehicleEntitySpawner(new Item.Settings()));
+    public static RoadConnectorItem ROAD_CONNECTOR = register("road_connector", new RoadConnectorItem(new Item.Settings()));
 
     public static final RegistryKey<ItemGroup> ITEM_GROUP_KEY = RegistryKey.of(Registries.ITEM_GROUP.getKey(), Identifier.of(SamsBits.MOD_ID, "item_group"));
     public static final ItemGroup ITEM_GROUP = PolymerItemGroupUtils.builder()
@@ -26,17 +30,17 @@ public class ModItems {
 
 
     public static void initialize() {
-        register(TRAIN_SCHEDULE, "train_schedule");
-        register(VEHICLE_ENTITY_SPAWNER, "vehicle");
-
         PolymerItemGroupUtils.registerPolymerItemGroup(ITEM_GROUP_KEY, ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP_KEY).register(itemGroup -> {
-            itemGroup.add(ModItems.TRAIN_SCHEDULE);
-            itemGroup.add(ModItems.VEHICLE_ENTITY_SPAWNER);
+            for (Entry<RegistryKey<Item>, Item> item : Registries.ITEM.getEntrySet()) {
+                if (item.getKey().getValue().getNamespace().equals(SamsBits.MOD_ID)) {
+                    itemGroup.add(item.getValue());
+                }
+            } 
         });
     }
 
-    public static Item register(Item item, String id) {
+    public static <T extends Item> T register(String id, T item) {
         Identifier itemID = Identifier.of(SamsBits.MOD_ID, id);
         return Registry.register(Registries.ITEM, itemID, item);
     }

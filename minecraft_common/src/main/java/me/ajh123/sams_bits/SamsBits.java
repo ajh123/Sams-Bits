@@ -1,7 +1,6 @@
 package me.ajh123.sams_bits;
 
-import me.ajh123.sams_bits.content.ModEntities;
-import me.ajh123.sams_bits.content.ModItems;
+import me.ajh123.sams_bits.content.ModContent;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -15,8 +14,7 @@ public class SamsBits implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Initializing content ...");
-		ModEntities.initialize();
-		ModItems.initialize();
+		ModContent.initialize();
 
 //		PermissionCheckEvent.EVENT.register((source, permission) -> {
 //			if (isSuperAdmin(source)) {

@@ -1,4 +1,4 @@
-package me.ajh123.sams_bits.content.items;
+package me.ajh123.sams_bits.content.vehicles;
 
 import eu.pb4.polymer.core.api.item.PolymerItem;
 import me.ajh123.sams_bits.content.ModEntities;

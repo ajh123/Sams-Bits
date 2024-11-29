@@ -49,6 +49,9 @@ dependencies {
     modRuntimeOnly include("eu.pb4:polymer-bundled:${polymer_core_version}")
     modImplementation include("eu.pb4:sgui:${sgui_version}")
     include(modImplementation("me.lucko:fabric-permissions-api:${fabric_permissions_api_version}"))
+    include(implementation("org.jgrapht:jgrapht-core:${jgrapht_version}"))
+
+    include(implementation(project(":common")))
 }
 
 processResources {
