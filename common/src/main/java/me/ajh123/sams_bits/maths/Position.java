@@ -1,40 +1,60 @@
 package me.ajh123.sams_bits.maths;
 
-public class Position {
-    private int x;
-    private int y;
-    private int z;
+import java.util.List;
+import java.util.Objects;
 
-    public Position(int x, int y, int z) {
+public class Position {
+    private Integer x;
+    private Integer y;
+    private Integer z;
+
+    public Position(Integer x, Integer y, Integer z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public int getX() {
+    public Position(Position position) {
+        this.x = position.getX();
+        this.y = position.getY();
+        this.z = position.getZ();
+    }
+
+    public Integer getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(Integer x) {
         this.x = x;
     }
 
-    public int getY() {
+    public Integer getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(Integer y) {
         this.y = y;
     }
 
-    public int getZ() {
+    public Integer getZ() {
         return z;
     }
 
-    public void setZ(int z) {
+    public void setZ(Integer z) {
         this.z = z;
     }
-    
+
+    public double distanceTo(Position other) {
+        int dx = other.x - this.x;
+        int dy = other.y - this.y;
+        int dz = other.z - this.z;
+        return Math.sqrt(dx * dx + dy * dy + dz * dz);
+    }
+
+    public List<Integer> toList() {
+        return List.of(x, y, z);
+    }
+
     public void add(Position other) {
         this.x += other.x;
         this.y += other.y;
@@ -78,11 +98,11 @@ public class Position {
         if (getClass() != obj.getClass())
             return false;
         Position other = (Position) obj;
-        if (x != other.x)
+        if (!Objects.equals(x, other.x))
             return false;
-        if (y != other.y)
+        if (!Objects.equals(y, other.y))
             return false;
-        if (z != other.z)
+        if (!Objects.equals(z, other.z))
             return false;
         return true;
     }

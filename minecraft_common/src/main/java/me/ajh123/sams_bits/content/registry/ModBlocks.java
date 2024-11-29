@@ -1,4 +1,4 @@
-package me.ajh123.sams_bits.content;
+package me.ajh123.sams_bits.content.registry;
 
 import me.ajh123.sams_bits.SamsBits;
 import me.ajh123.sams_bits.content.roads.RoadNodeBlock;

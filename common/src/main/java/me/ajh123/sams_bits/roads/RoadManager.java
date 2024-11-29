@@ -1,18 +1,18 @@
 package me.ajh123.sams_bits.roads;
 
 import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.WeightedMultigraph;
+import org.jgrapht.graph.DefaultWeightedEdge;
+import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadManager {
     private static RoadManager INSTANCE = null;
-    private final Graph<RoadNode, DefaultEdge> graph;
+    private final Graph<RoadNode, DefaultWeightedEdge> graph;
 
     private RoadManager() {
-        //disable instanciation
-        graph = new WeightedMultigraph<>(DefaultEdge.class);
+        //disable instantiation
+        graph = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
     }
 
     public static RoadManager getInstance() {
@@ -25,7 +25,7 @@ public class RoadManager {
     public boolean addRoadNode(RoadNode node) {
         boolean res = graph.addVertex(node);
         if (res) {
-            System.out.println(String.format("Added node %s", node));
+            System.out.printf("Added node %s\n", node);
         }
         return res;
     }
@@ -45,7 +45,7 @@ public class RoadManager {
     public boolean removeNode(RoadNode node) {
         boolean res = graph.removeVertex(node);
         if (res) {
-            System.out.println(String.format("Removed node %s", node));
+            System.out.printf("Removed node %s\n", node);
         }
         return res;
     }
@@ -60,11 +60,14 @@ public class RoadManager {
             .get();
     }
 
-    public DefaultEdge connectNodes(RoadNode source, RoadNode destination) {
-        return graph.addEdge(source, destination);
+    public DefaultWeightedEdge connectNodes(RoadNode source, RoadNode destination) {
+        DefaultWeightedEdge edge = graph.addEdge(source, destination);
+        graph.setEdgeWeight(edge, source.getPosition().distanceTo(destination.getPosition()));
+        System.out.printf("Connected nodes %s, %s\n", source, destination);
+        return edge;
     }
 
-    public DefaultEdge connectNodes(Position source, Position destination) {
+    public DefaultWeightedEdge connectNodes(Position source, Position destination) {
         RoadNode rSource = new RoadNode(source);
         RoadNode rDest = new RoadNode(destination);
         return connectNodes(rSource, rDest);

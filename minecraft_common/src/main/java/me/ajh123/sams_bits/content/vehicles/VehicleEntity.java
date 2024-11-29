@@ -1,6 +1,6 @@
 package me.ajh123.sams_bits.content.vehicles;
 
-import me.ajh123.sams_bits.content.ModItems;
+import me.ajh123.sams_bits.content.registry.ModItems;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.vehicle.BoatEntity;

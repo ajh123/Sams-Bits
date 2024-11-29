@@ -1,4 +1,4 @@
-package me.ajh123.sams_bits.content;
+package me.ajh123.sams_bits.content.registry;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;

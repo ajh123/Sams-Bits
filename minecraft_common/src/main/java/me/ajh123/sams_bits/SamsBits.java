@@ -1,6 +1,6 @@
 package me.ajh123.sams_bits;
 
-import me.ajh123.sams_bits.content.ModContent;
+import me.ajh123.sams_bits.content.registry.ModContent;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;

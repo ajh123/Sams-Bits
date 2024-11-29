@@ -4,5 +4,6 @@
   "entity.sams_bits.vehicle": "Vehicle",
   "item.sams_bits.vehicle": "Vehicle",
   "block.sams_bits.road_node": "Road Node",
-  "item.sams_bits.road_connector": "Road Connector"
+  "item.sams_bits.road_connector": "Road Connector",
+  "itemTooltip.sams_bits.linking": "Linking from %d, %d, %d"
 }

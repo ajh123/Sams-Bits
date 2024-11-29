@@ -1,6 +1,6 @@
 package me.ajh123.sams_bits;
 
-import me.ajh123.sams_bits.content.ModEntities;
+import me.ajh123.sams_bits.content.registry.ModEntities;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry ;
 
