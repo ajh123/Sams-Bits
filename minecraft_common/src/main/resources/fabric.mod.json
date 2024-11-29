@@ -2,8 +2,8 @@
 	"schemaVersion": 1,
 	"id": "sams_bits",
 	"version": "${version}",
-	"name": "Sam's Bits",
-	"description": "**Sam's Bits** is a personal Minecraft mod designed to add random extensions to other mods.",
+	"name": "Sam's Transport Bits",
+	"description": "**Sam's Bits**, the Minecraft mod designed to element transportation add add random other things.",
 	"authors": [
 		"ajh123 (samuelh2005)"
 	],

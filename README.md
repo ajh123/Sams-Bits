@@ -1,8 +1,15 @@
-# Sam's Bits
+# Sam's Transport Bits
 
-**Sam's Bits** is a personal Minecraft mod designed to add random extensions to other mods.
-While the mod was originally created for personal use, it is publicly available, and more features are planned for future updates.
-Stay tuned as this mod continues to grow with more unique integrations and utilities!
+**Sam's Bits**, the Minecraft mod designed to element transportation add add random other things.
+
+*While the mod was originally created for personal use, it is publicly available, and more features are planned for future updates.*
+*Stay tuned as this mod continues to grow with more unique integrations and utilities!*
+
+## Feaures
+
+- [ ] : Vehicle systems **(In Progress)**
+    - [ ] : Automated vehicles **(In Progress)**
+    - [ ] : Player driven vehicles
 
 ## License
 
