@@ -1,7 +1,5 @@
 package me.ajh123.sams_bits.roads;
 
-import java.net.URI;
-
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.WeightedMultigraph;
