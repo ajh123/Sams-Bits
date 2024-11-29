@@ -7,6 +7,7 @@ import me.ajh123.sams_bits.SamsBits;
 import me.ajh123.sams_bits.content.other.TrainSchedule;
 import me.ajh123.sams_bits.content.roads.RoadConnectorItem;
 import me.ajh123.sams_bits.content.vehicles.VehicleEntitySpawner;
+import me.ajh123.sams_bits.utils.HiddenItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -33,8 +34,10 @@ public class ModItems {
         PolymerItemGroupUtils.registerPolymerItemGroup(ITEM_GROUP_KEY, ITEM_GROUP);
         ItemGroupEvents.modifyEntriesEvent(ITEM_GROUP_KEY).register(itemGroup -> {
             for (Entry<RegistryKey<Item>, Item> item : Registries.ITEM.getEntrySet()) {
-                if (item.getKey().getValue().getNamespace().equals(SamsBits.MOD_ID)) {
-                    itemGroup.add(item.getValue());
+                if (!(item.getValue() instanceof HiddenItem)) {
+                    if (item.getKey().getValue().getNamespace().equals(SamsBits.MOD_ID)) {
+                        itemGroup.add(item.getValue());
+                    }
                 }
             } 
         });

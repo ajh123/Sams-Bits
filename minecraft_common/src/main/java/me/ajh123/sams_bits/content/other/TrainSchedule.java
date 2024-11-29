@@ -1,6 +1,7 @@
 package me.ajh123.sams_bits.content.other;
 
 import eu.pb4.polymer.core.api.item.PolymerItem;
+import me.ajh123.sams_bits.utils.HiddenItem;
 import me.ajh123.sams_bits.utils.UseOnEntityEvent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +17,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 
-public class TrainSchedule extends Item implements UseOnEntityEvent, PolymerItem {
+public class TrainSchedule extends Item implements UseOnEntityEvent, PolymerItem, HiddenItem {
     public TrainSchedule(Settings settings) {
         super(settings);
     }

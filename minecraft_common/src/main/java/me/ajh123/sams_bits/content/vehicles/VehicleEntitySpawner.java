@@ -2,6 +2,7 @@ package me.ajh123.sams_bits.content.vehicles;
 
 import eu.pb4.polymer.core.api.item.PolymerItem;
 import me.ajh123.sams_bits.content.ModEntities;
+import me.ajh123.sams_bits.utils.HiddenItem;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.entity.BlockEntity;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 
-public class VehicleEntitySpawner extends Item implements PolymerItem {
+public class VehicleEntitySpawner extends Item implements PolymerItem, HiddenItem {
     private final EntityType<?> entityType = ModEntities.VEHICLE_ENTITY;
 
     public VehicleEntitySpawner(Settings settings) {
