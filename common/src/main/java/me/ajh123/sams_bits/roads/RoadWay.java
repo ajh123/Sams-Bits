@@ -10,9 +10,12 @@ import org.jgrapht.graph.DefaultWeightedEdge;
 import de.topobyte.osm4j.core.model.impl.Tag;
 
 public class RoadWay extends DefaultWeightedEdge {
+    private static long nextId = 0;
+    private final long id;
     private final Map<String, String> tags;
 
     public RoadWay() {
+        this.id = nextId++;
         this.tags = new HashMap<>();
         this.tags.put("highway", "unclassified");
         this.tags.put("name", "Unnamed Road");
@@ -24,6 +27,10 @@ public class RoadWay extends DefaultWeightedEdge {
 
     public Map<String, String> getTags() {
         return tags;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public List<Tag> OSMTags() {

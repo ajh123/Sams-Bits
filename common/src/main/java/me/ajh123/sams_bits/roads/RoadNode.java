@@ -1,5 +1,6 @@
 package me.ajh123.sams_bits.roads;
 
+import de.topobyte.osm4j.core.model.impl.Node;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadNode {
@@ -52,5 +53,11 @@ public class RoadNode {
     @Override
     public String toString() {
         return "RoadNode [position=" + position + "]";
+    }
+
+    public Node toOSMNode() {
+        long lat = -position.getZ();
+        long lon = position.getX();
+        return new Node(id, lon, lat);
     }
 }
