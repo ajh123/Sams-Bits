@@ -1,18 +1,17 @@
 package me.ajh123.sams_bits.roads;
 
 import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadManager {
     private static RoadManager INSTANCE = null;
-    private final Graph<RoadNode, DefaultWeightedEdge> graph;
+    private final Graph<RoadNode, RoadWay> graph;
 
     private RoadManager() {
         //disable instantiation
-        graph = new SimpleDirectedWeightedGraph<>(DefaultWeightedEdge.class);
+        graph = new SimpleDirectedWeightedGraph<>(RoadWay.class);
     }
 
     public static RoadManager getInstance() {
@@ -60,16 +59,20 @@ public class RoadManager {
             .get();
     }
 
-    public DefaultWeightedEdge connectNodes(RoadNode source, RoadNode destination) {
-        DefaultWeightedEdge edge = graph.addEdge(source, destination);
+    public RoadWay connectNodes(RoadNode source, RoadNode destination) {
+        RoadWay edge = graph.addEdge(source, destination);
         graph.setEdgeWeight(edge, source.getPosition().distanceTo(destination.getPosition()));
         System.out.printf("Connected nodes %s, %s\n", source, destination);
         return edge;
     }
 
-    public DefaultWeightedEdge connectNodes(Position source, Position destination) {
+    public RoadWay connectNodes(Position source, Position destination) {
         RoadNode rSource = new RoadNode(source);
         RoadNode rDest = new RoadNode(destination);
         return connectNodes(rSource, rDest);
+    }
+
+    public Graph<RoadNode, RoadWay> getGraph() {
+        return graph;
     }
 }

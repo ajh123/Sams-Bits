@@ -11,12 +11,23 @@ base {
 
 repositories {
     mavenCentral()
+    maven {
+        url 'https://mvn.topobyte.de'
+    }
+    maven {
+        url 'https://mvn.slimjars.com'
+    }
 }
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation("org.jgrapht:jgrapht-core:${jgrapht_version}")
+    implementation("de.topobyte:osm4j-core:1.3.0")
+    implementation("de.topobyte:osm4j-xml:1.3.0")
+    implementation("de.topobyte:osm4j-pbf:1.3.0")
+    implementation("de.topobyte:osm4j-geometry:1.3.0")
+    implementation("de.topobyte:osm4j-pbf-full-runtime:1.3.0")
 }
 
 test {

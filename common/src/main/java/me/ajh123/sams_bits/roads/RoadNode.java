@@ -3,10 +3,13 @@ package me.ajh123.sams_bits.roads;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadNode {
+    private static long nextId = 0;
+    private final long id;
     private Position position;
 
     public RoadNode(Position position) {
         this.position = position;
+        this.id = nextId++;
     }
 
     public Position getPosition() {
@@ -15,6 +18,10 @@ public class RoadNode {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public long getId() {
+        return id;
     }
 
     @Override
