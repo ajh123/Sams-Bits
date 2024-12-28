@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "sams_bits:block/road_node"
+    }
+  }
+}

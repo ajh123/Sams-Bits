@@ -3,7 +3,8 @@
 	"package": "me.ajh123.sams_bits.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"ExampleClientMixin",
+		"ClientWorldMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

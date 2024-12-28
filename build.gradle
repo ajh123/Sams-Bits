@@ -7,3 +7,18 @@ java {
         languageVersion = JavaLanguageVersion.of(21)
     }
 }
+
+allprojects {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'https://mvn.topobyte.de'
+        }
+        maven {
+            url 'https://mvn.slimjars.com'
+        }
+        maven {
+            url 'https://maven.nucleoid.xyz'
+        }
+    }
+}

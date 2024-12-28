@@ -9,16 +9,6 @@ base {
     archivesName = project.common_archives_base_name
 }
 
-repositories {
-    mavenCentral()
-    maven {
-        url 'https://mvn.topobyte.de'
-    }
-    maven {
-        url 'https://mvn.slimjars.com'
-    }
-}
-
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'

@@ -1,4 +1,4 @@
-package me.ajh123.sams_bits.content.registry;
+package me.ajh123.sams_bits.content.registry.data;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
@@ -8,6 +8,8 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.ItemTags;
 
 import java.util.concurrent.CompletableFuture;
+
+import me.ajh123.sams_bits.content.registry.ModItems;
 
 public class ItemTagProvider extends FabricTagProvider<Item> {
     public ItemTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {

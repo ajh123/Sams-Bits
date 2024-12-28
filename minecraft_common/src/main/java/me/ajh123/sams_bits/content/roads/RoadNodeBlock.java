@@ -1,6 +1,8 @@
 package me.ajh123.sams_bits.content.roads;
 
+import me.ajh123.sams_bits.content.registry.ModBlocks;
 import me.ajh123.sams_bits.content.registry.ModComponents;
+import me.ajh123.sams_bits.content.registry.ModItems;
 import me.ajh123.sams_bits.maths.Position;
 import me.ajh123.sams_bits.roads.RoadManager;
 import me.ajh123.sams_bits.roads.RoadNode;
@@ -34,6 +36,11 @@ public class RoadNodeBlock extends Block {
         return BlockRenderType.INVISIBLE;
     }
 
+    @Override
+    protected VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
+        return VoxelShapes.empty();
+    }
+
     protected float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
         return 1.0F;
     }
@@ -41,6 +48,14 @@ public class RoadNodeBlock extends Block {
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
+    }
+
+    @Override
+    protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+        return 
+            context.isHolding(ModBlocks.ROAD_NODE.asItem()) ||
+            context.isHolding(ModItems.ROAD_CONNECTOR) 
+        ? VoxelShapes.fullCube() : VoxelShapes.empty();
     }
 
     @Override
