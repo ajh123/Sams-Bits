@@ -7,10 +7,9 @@ import java.nio.file.Path;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
-import org.jgrapht.nio.json.JSONExporter;
-import org.jgrapht.nio.json.JSONImporter;
 
 import me.ajh123.sams_bits.SamsBitsCommon;
+import me.ajh123.sams_bits.data.JSON_Exporter;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadManager {
@@ -80,23 +79,15 @@ public class RoadManager {
     }
 
     public void save() {
-        try {
-            Files.createDirectories(SAVE_PATH);
-            File roads = SAVE_PATH.resolve("graph.json").toFile();
-            roads.createNewFile();
-
-            final var jsonExporter = new JSONExporter<RoadNode, RoadWay>();
-            jsonExporter.exportGraph(graph, roads);        
-        } catch (IOException e) {
-            common.log_warn(e.getMessage());
-        }
+        JSON_Exporter exporter = new JSON_Exporter(SAVE_PATH);
+        exporter.export(this);
     }
 
     public void load() {
-        File roads = SAVE_PATH.resolve("graph.json").toFile();
-        if (roads.exists()) {
-            final var jsonImporter = new JSONImporter<RoadNode, RoadWay>();
-            jsonImporter.importGraph(graph, roads);
-        }
+        // File roads = SAVE_PATH.resolve("graph.json").toFile();
+        // if (roads.exists()) {
+        //     final var jsonImporter = new JSONImporter<RoadNode, RoadWay>();
+        //     jsonImporter.importGraph(graph, roads);
+        // }
     }
 }
