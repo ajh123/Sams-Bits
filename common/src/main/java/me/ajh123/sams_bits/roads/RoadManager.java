@@ -85,6 +85,9 @@ public class RoadManager {
 
     public RoadWay connectNodes(RoadNode source, RoadNode destination) {
         RoadWay edge = graph.addEdge(source, destination);
+        if (edge == null) {
+            return null;
+        }
         edge.setId(RoadWay.nextId++);
         edge.source_id = source.getId();
         edge.target_id = destination.getId();

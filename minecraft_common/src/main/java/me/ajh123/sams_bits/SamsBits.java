@@ -1,12 +1,18 @@
 package me.ajh123.sams_bits;
 
 import me.ajh123.sams_bits.content.registry.ModContent;
+import me.ajh123.sams_bits.content.roads.RoadNodeBlock;
 import me.ajh123.sams_bits.roads.RoadManager;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
+import net.minecraft.block.BlockState;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.WorldSavePath;
+import net.minecraft.util.math.BlockPos;
 
 import java.nio.file.Path;
 
@@ -24,6 +30,28 @@ public class SamsBits extends SamsBitsCommon implements ModInitializer {
 
 		ServerWorldEvents.LOAD.register(this::onWorldLoad);
 		ServerWorldEvents.UNLOAD.register(this::onWorldUnload);
+
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            // Ensure the player is not in spectator mode
+            if (player != null && !player.isSpectator() && player.isSneaking() && hitResult != null) {
+                // Skip off-hand interaction to avoid duplicate events
+                if (hand == Hand.OFF_HAND) {
+                    return ActionResult.PASS; // Ignore off-hand interactions
+                }
+
+                BlockPos pos = hitResult.getBlockPos();
+                BlockState state = world.getBlockState(pos);
+
+                // Check if the block is an instance of your custom block
+                if (state.getBlock() instanceof RoadNodeBlock block) {
+                    // Call the block's `onUse` method
+                    return block.onUse(state, world, pos, player, hitResult);
+                }
+            }
+
+            // Pass to other interactions if conditions are not met
+            return ActionResult.PASS;
+        });
 	}
 
 	public static String getWorldName(ServerWorld world) {

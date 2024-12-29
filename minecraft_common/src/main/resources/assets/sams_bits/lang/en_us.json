@@ -1,9 +1,14 @@
 {
-  "itemGroup.sams_bits": "Sam's Bits",
+  "itemGroup.sams_bits": "Sam's Transport Bits",
   "item.sams_bits.train_schedule": "Train Schedule",
   "entity.sams_bits.vehicle": "Vehicle",
   "item.sams_bits.vehicle": "Vehicle",
   "block.sams_bits.road_node": "Road Node",
   "item.sams_bits.road_connector": "Road Connector",
-  "itemTooltip.sams_bits.linking": "Linking from %d, %d, %d"
+  "itemTooltip.sams_bits.linking": "Linking from %d, %d, %d",
+  "interaction.road_node.get_info": "This is Road Node %d.",
+  "interaction.road_node.linked": "Road Node %d connected to Road Node %d.",
+  "interaction.road_node.link_loop": "Cannot connect Road Node to itself!",
+  "interaction.road_node.already_linked": "Road Nodes are already linked!",
+  "interaction.road_node.not_defined": "This Road Node is not defined, try creating a link first."
 }

@@ -14,6 +14,10 @@ import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -71,6 +75,26 @@ public class RoadNodeBlock extends Block {
         super.onStateReplaced(state, world, pos, newState, moved);
     }
 
+    
+
+    @Override
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (!world.isClient) {
+            RoadManager roadManager = SamsBits.getRoadManager((ServerWorld) world);
+            Position position = new Position(pos.getX(), pos.getY(), pos.getZ());
+            RoadNode node = roadManager.getNode(position);
+            if (player.isSneaking()) {
+                if (node == null) {
+                    player.sendMessage(Text.translatable("interaction.road_node.not_defined"));
+                } else {
+                    player.sendMessage(Text.translatable("interaction.road_node.get_info", node.getId()));
+                }
+                return ActionResult.SUCCESS;           
+            }
+        }
+        return super.onUse(state, world, pos, player, hit);
+    }
+
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos,
             PlayerEntity player, Hand hand, BlockHitResult hit) {
@@ -79,20 +103,42 @@ public class RoadNodeBlock extends Block {
 
             Position position = new Position(pos.getX(), pos.getY(), pos.getZ());
             roadManager.addRoadNode(position);
-            if (stack.getItem() instanceof RoadConnectorItem) {
-                RoadNode node = roadManager.getNode(position);
-                LinkingComponent linking = stack.getOrDefault(ModComponents.LINKING_COMPONENT, LinkingComponent.empty());
-                if (linking.getSource() == null) {
-                    linking.setSource(new Position(node.getPosition()));
-                    stack.set(ModComponents.LINKING_COMPONENT, linking);
-                } else {
-                    roadManager.connectNodes(linking.getSource(), node.getPosition());
-                    linking.setSource(null);
-                    stack.set(ModComponents.LINKING_COMPONENT, null);
-                }
+            RoadNode node = roadManager.getNode(position);
 
+            if (player.isSneaking()) {
+                player.sendMessage(Text.translatable("interaction.road_node.get_info", node.getId()));
+                return ItemActionResult.SUCCESS;
+            } else {
+                if (stack.getItem() instanceof RoadConnectorItem) {
+                    LinkingComponent linking = stack.getOrDefault(ModComponents.LINKING_COMPONENT, LinkingComponent.empty());
+                    if (linking.getSource() == null) {
+                        linking.setSource(new Position(node.getPosition()));
+                        stack.set(ModComponents.LINKING_COMPONENT, linking);
+                    } else {
+                        RoadNode source = roadManager.getNode(linking.getSource());
+
+                        if (source == node) {
+                            player.sendMessage(Text.translatable("interaction.road_node.link_loop").formatted(Formatting.RED), true);
+                            linking.setSource(null);
+                            stack.set(ModComponents.LINKING_COMPONENT, null);
+                            return ItemActionResult.FAIL;
+                        }
+                        var way = roadManager.connectNodes(linking.getSource(), node.getPosition());
+                        if (way == null) {
+                            player.sendMessage(Text.translatable("interaction.road_node.already_linked").formatted(Formatting.RED), true);
+                            return ItemActionResult.FAIL;
+                        }
+
+                        player.sendMessage(Text.translatable("interaction.road_node.linked", source.getId(), node.getId()).formatted(Formatting.GREEN), true);
+                        player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP);
+
+                        linking.setSource(null);
+                        stack.set(ModComponents.LINKING_COMPONENT, null);
+                        return ItemActionResult.SUCCESS;
+                    }
+                }
             }
         }
-        return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
+        return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 }
