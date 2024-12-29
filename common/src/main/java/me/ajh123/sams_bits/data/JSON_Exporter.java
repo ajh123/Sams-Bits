@@ -23,7 +23,6 @@ public class JSON_Exporter extends Exporter {
         }
     }
 
-
     @Override
     protected void write(RoadNode node) {
         try {
@@ -50,7 +49,6 @@ public class JSON_Exporter extends Exporter {
 
     @Override
     protected void complete() {
-        // Method does not need to do anything.
+        // For JSON, this method does not need to do anything.
     }
-
 }

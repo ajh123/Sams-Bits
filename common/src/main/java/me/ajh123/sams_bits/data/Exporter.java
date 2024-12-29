@@ -2,6 +2,8 @@ package me.ajh123.sams_bits.data;
 
 import java.nio.file.Path;
 
+import org.jgrapht.Graph;
+
 import me.ajh123.sams_bits.SamsBitsCommon;
 import me.ajh123.sams_bits.roads.RoadManager;
 import me.ajh123.sams_bits.roads.RoadNode;
@@ -23,7 +25,7 @@ public abstract class Exporter {
     protected abstract void complete();
     
     public void export(RoadManager manager) {
-        var graph = manager.getGraph();
+        Graph<RoadNode, RoadWay> graph = manager.getGraph();
 
         try {
             try {

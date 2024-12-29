@@ -13,6 +13,8 @@ public class RoadWay extends DefaultWeightedEdge {
     private static long nextId = 0;
     private final long id;
     private final Map<String, String> tags;
+    public long source;
+    public long target;
 
     public RoadWay() {
         this.id = nextId++;

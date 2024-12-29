@@ -68,6 +68,8 @@ public class RoadManager {
 
     public RoadWay connectNodes(RoadNode source, RoadNode destination) {
         RoadWay edge = graph.addEdge(source, destination);
+        edge.source = source.getId();
+        edge.target = destination.getId();
         graph.setEdgeWeight(edge, source.getPosition().distanceTo(destination.getPosition()));
         common.log_debug(String.format("Connected nodes %s, %s\n", source, destination));
         return edge;
