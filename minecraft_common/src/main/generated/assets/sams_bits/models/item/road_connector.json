@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "sams_bits:item/road_node"
+    "layer0": "sams_bits:item/road_connector"
   }
 }

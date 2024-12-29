@@ -13,6 +13,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.ajh123.sams_bits.content.registry.ModBlocks;
+import me.ajh123.sams_bits.content.registry.ModItems;
+import me.ajh123.sams_bits.content.roads.RoadConnectorItem;
 
 @Mixin(ClientWorld.class)
 public class ClientWorldMixin {
@@ -25,11 +27,14 @@ public class ClientWorldMixin {
 
         // Check if the item is your custom item
         if (client.interactionManager.getCurrentGameMode() == GameMode.CREATIVE &&
-            item == ModBlocks.ROAD_NODE.asItem()) {
+            item == ModBlocks.ROAD_NODE.asItem() || item == ModItems.ROAD_CONNECTOR) {
             if (item instanceof BlockItem blockItem) {
                 // Return the block associated with the custom item
                 Block block = blockItem.getBlock();
                 cir.setReturnValue(block);  // Set the return value to your block
+            }
+            if (item instanceof RoadConnectorItem) {
+                cir.setReturnValue(ModBlocks.ROAD_NODE);
             }
         }
     }

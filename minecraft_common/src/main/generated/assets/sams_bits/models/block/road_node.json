@@ -1,5 +1,5 @@
 {
   "textures": {
-    "particle": "minecraft:item/barrier"
+    "particle": "sams_bits:item/road_node"
   }
 }
