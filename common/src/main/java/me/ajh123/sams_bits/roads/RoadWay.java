@@ -4,21 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.jgrapht.graph.DefaultWeightedEdge;
 
 import de.topobyte.osm4j.core.model.impl.Tag;
 
 public class RoadWay extends DefaultWeightedEdge {
-    private static long nextId = 0;
-    private final long id;
-    private final Map<String, String> tags;
-    public long source;
-    public long target;
+    public static long nextId = 0;
+    private long id;
+    private Map<String, String> tags;
+    public long source_id;
+    public long target_id;
 
     public RoadWay() {
-        this.id = nextId++;
+        // Empty constructor for Jackson
         this.tags = new HashMap<>();
+    }
+
+    public RoadWay(long id) {
+        super();
+        this.id = id;
         this.tags.put("highway", "unclassified");
         this.tags.put("name", "Unnamed Road");
     }
@@ -31,6 +37,10 @@ public class RoadWay extends DefaultWeightedEdge {
         return tags;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
@@ -39,5 +49,25 @@ public class RoadWay extends DefaultWeightedEdge {
         List<Tag> osmTags = new ArrayList<>();
         tags.forEach((key, value) -> osmTags.add(new Tag(key, value)));
         return osmTags;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, tags, source_id, target_id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        RoadWay other = (RoadWay) obj;
+        return id == other.id &&
+               source_id == other.source_id &&
+               target_id == other.target_id &&
+               Objects.equals(tags, other.tags);
     }
 }

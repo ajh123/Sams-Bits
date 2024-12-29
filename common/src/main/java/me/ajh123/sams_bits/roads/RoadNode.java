@@ -1,16 +1,22 @@
 package me.ajh123.sams_bits.roads;
 
+import java.util.Objects;
+
 import de.topobyte.osm4j.core.model.impl.Node;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadNode {
-    private static long nextId = 0;
-    private final long id;
+    public static long nextId = 0;
+    private long id;
     private Position position;
 
-    public RoadNode(Position position) {
+    public RoadNode() {
+        // Empty constructor for Jackson
+    }
+
+    public RoadNode(Position position, long id) {
         this.position = position;
-        this.id = nextId++;
+        this.id = id;
     }
 
     public Position getPosition() {
@@ -27,10 +33,7 @@ public class RoadNode {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((position == null) ? 0 : position.hashCode());
-        return result;
+        return Objects.hash(id, position);
     }
 
     @Override
@@ -47,12 +50,14 @@ public class RoadNode {
                 return false;
         } else if (!position.equals(other.position))
             return false;
+        if (id != other.id)
+            return false;
         return true;
     }
 
     @Override
     public String toString() {
-        return "RoadNode [position=" + position + "]";
+        return "RoadNode [position=" + position + " id= " + id + "]";
     }
 
     public Node toOSMNode() {

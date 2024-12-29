@@ -8,6 +8,10 @@ public class Position {
     private Integer y;
     private Integer z;
 
+    public Position() {
+        // Empty constructor for Jackson
+    }
+
     public Position(Integer x, Integer y, Integer z) {
         this.x = x;
         this.y = y;
@@ -81,12 +85,7 @@ public class Position {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + x;
-        result = prime * result + y;
-        result = prime * result + z;
-        return result;
+        return Objects.hash(x, y, z);
     }
 
     @Override

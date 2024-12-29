@@ -1,12 +1,14 @@
 package me.ajh123.sams_bits.roads;
 
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import me.ajh123.sams_bits.SamsBitsCommon;
-import me.ajh123.sams_bits.data.JSON_Exporter;
+import me.ajh123.sams_bits.data.exporter.JSON_Exporter;
+import me.ajh123.sams_bits.data.importer.JSON_Importer;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadManager {
@@ -29,6 +31,10 @@ public class RoadManager {
     }
 
     public boolean addRoadNode(RoadNode node) {
+        if (getNode(node.getPosition()) != null) {
+            return false;
+        }
+
         boolean res = graph.addVertex(node);
         if (res) {
             common.log_debug(String.format("Added node %s\n", node));
@@ -37,18 +43,13 @@ public class RoadManager {
     }
 
     public boolean addRoadNode(Position position) {
-        return addRoadNode(new RoadNode(position));
-    }
-
-    public boolean roadNodeExists(RoadNode node) {
-        return graph.containsVertex(node);
-    }
-
-    public boolean roadNodeExists(Position position) {
-        return graph.containsVertex(new RoadNode(position));
+        return addRoadNode(new RoadNode(position, RoadNode.nextId++));
     }
 
     public boolean removeNode(RoadNode node) {
+        if (node == null) {
+            return false;
+        }
         boolean res = graph.removeVertex(node);
         if (res) {
             common.log_debug(String.format("Removed node %s\n", node));
@@ -57,27 +58,44 @@ public class RoadManager {
     }
 
     public boolean removeNode(Position position) {
-        return removeNode(new RoadNode(position));
+        return removeNode(getNode(position));
     }
 
     public RoadNode getNode(Position pos) {
-        return graph
-            .vertexSet().stream().filter(node -> node.getPosition().equals(pos)).findAny()
-            .get();
+        try {
+            return graph
+                .vertexSet().stream().filter(node -> node.getPosition().equals(pos)).findAny()
+                .get();
+        } catch (NoSuchElementException e) {
+            SamsBitsCommon.INSTANCE.log_debug("Failed getting node: "+e.getMessage());
+            return null;
+        }
+    }
+
+    public RoadNode getNode(long id) {
+        try {
+            return graph
+                .vertexSet().stream().filter(node -> node.getId() == id).findAny()
+                .get();
+        } catch (NoSuchElementException e) {
+            SamsBitsCommon.INSTANCE.log_debug("Failed getting node: "+e.getMessage());
+            return null;
+        }
     }
 
     public RoadWay connectNodes(RoadNode source, RoadNode destination) {
         RoadWay edge = graph.addEdge(source, destination);
-        edge.source = source.getId();
-        edge.target = destination.getId();
+        edge.setId(RoadWay.nextId++);
+        edge.source_id = source.getId();
+        edge.target_id = destination.getId();
         graph.setEdgeWeight(edge, source.getPosition().distanceTo(destination.getPosition()));
         common.log_debug(String.format("Connected nodes %s, %s\n", source, destination));
         return edge;
     }
 
     public RoadWay connectNodes(Position source, Position destination) {
-        RoadNode rSource = new RoadNode(source);
-        RoadNode rDest = new RoadNode(destination);
+        RoadNode rSource = getNode(source);
+        RoadNode rDest = getNode(destination);
         return connectNodes(rSource, rDest);
     }
 
@@ -91,10 +109,7 @@ public class RoadManager {
     }
 
     public void load() {
-        // File roads = SAVE_PATH.resolve("graph.json").toFile();
-        // if (roads.exists()) {
-        //     final var jsonImporter = new JSONImporter<RoadNode, RoadWay>();
-        //     jsonImporter.importGraph(graph, roads);
-        // }
+        JSON_Importer importer = new JSON_Importer(this.save_path);
+        importer.importData(this);
     }
 }
