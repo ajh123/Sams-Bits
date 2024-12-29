@@ -26,16 +26,38 @@ public class SamsBits extends SamsBitsCommon implements ModInitializer {
 		ServerWorldEvents.UNLOAD.register(this::onWorldUnload);
 	}
 
+	public static String getWorldName(ServerWorld world) {
+		String worldName = world.getChunkManager().chunkLoadingManager.getSaveDir();
+		return worldName;
+	}
+
+	public static RoadManager getRoadManager(ServerWorld world) {
+		String worldName = SamsBits.getWorldName((ServerWorld) world);
+		SamsBitsCommon common = SamsBitsCommon.getInstance();
+		RoadManager roadManager = common.getRoadManager(worldName);
+		return roadManager;
+	}
+
     private void onWorldLoad(MinecraftServer server, ServerWorld world) {
 		Path dir = server.getSavePath(WorldSavePath.ROOT).resolve(MOD_ID);
-		RoadManager.SAVE_PATH = dir.resolve("roads/");
-		this.getRoadManager().load();
+		String worldName = getWorldName(world);
+		Path worldDir = dir.resolve("roads").resolve(worldName);
+
+		RoadManager manager = this.getRoadManager(worldName);
+		manager.setSavePath(worldDir);
+		manager.load();
+		LOGGER.info("Road storage (%s): All data loaded".formatted(worldName));
     }
 
 	private void onWorldUnload(MinecraftServer server, ServerWorld world) {
 		Path dir = server.getSavePath(WorldSavePath.ROOT).resolve(MOD_ID);
-		RoadManager.SAVE_PATH = dir.resolve("roads/");
-		this.getRoadManager().save();
+		String worldName = getWorldName(world);
+		Path worldDir = dir.resolve("roads").resolve(worldName);
+
+		RoadManager manager = this.getRoadManager(worldName);
+		manager.setSavePath(worldDir);
+		manager.save();
+		LOGGER.info("Road storage (%s): All data saved".formatted(worldName));
 	}
 
 	@Override

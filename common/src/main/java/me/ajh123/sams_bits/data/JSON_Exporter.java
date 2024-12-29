@@ -39,7 +39,7 @@ public class JSON_Exporter extends Exporter {
     @Override
     protected void write(RoadWay way) {
         try {
-            File file = this.getSavePath().resolve("ways").resolve(String.valueOf(node.getId())+".json").toFile();
+            File file = this.getSavePath().resolve("ways").resolve(String.valueOf(way.getId())+".json").toFile();
             Files.createDirectories(file.toPath().getParent());
             file.createNewFile();
             objectMapper.writeValue(file, way);
@@ -50,7 +50,7 @@ public class JSON_Exporter extends Exporter {
 
     @Override
     protected void complete() {
-        // TODO Auto-generated method stub
+        // Method does not need to do anything.
     }
 
 }

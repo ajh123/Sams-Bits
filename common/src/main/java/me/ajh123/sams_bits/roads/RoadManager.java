@@ -1,8 +1,5 @@
 package me.ajh123.sams_bits.roads;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.jgrapht.Graph;
@@ -13,7 +10,7 @@ import me.ajh123.sams_bits.data.JSON_Exporter;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadManager {
-    public static Path SAVE_PATH = Path.of(".");
+    private Path save_path = Path.of(".");
     private final SamsBitsCommon common;
     private final Graph<RoadNode, RoadWay> graph;
 
@@ -21,6 +18,14 @@ public class RoadManager {
         //disable instantiation
         this.graph = new SimpleDirectedWeightedGraph<>(RoadWay.class);
         this.common = common;
+    }
+
+    public void setSavePath(Path save_path) {
+        this.save_path = save_path;
+    }
+
+    public Path getSavePath() {
+        return this.save_path;
     }
 
     public boolean addRoadNode(RoadNode node) {
@@ -79,7 +84,7 @@ public class RoadManager {
     }
 
     public void save() {
-        JSON_Exporter exporter = new JSON_Exporter(SAVE_PATH);
+        JSON_Exporter exporter = new JSON_Exporter(this.save_path);
         exporter.export(this);
     }
 
