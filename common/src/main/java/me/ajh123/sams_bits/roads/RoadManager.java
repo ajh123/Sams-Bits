@@ -1,30 +1,33 @@
 package me.ajh123.sams_bits.roads;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
+import org.jgrapht.nio.json.JSONExporter;
+import org.jgrapht.nio.json.JSONImporter;
 
+import me.ajh123.sams_bits.SamsBitsCommon;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadManager {
-    private static RoadManager INSTANCE = null;
+    public static Path SAVE_PATH = Path.of(".");
+    private final SamsBitsCommon common;
     private final Graph<RoadNode, RoadWay> graph;
 
-    private RoadManager() {
+    public RoadManager(SamsBitsCommon common) {
         //disable instantiation
-        graph = new SimpleDirectedWeightedGraph<>(RoadWay.class);
-    }
-
-    public static RoadManager getInstance() {
-        if (RoadManager.INSTANCE == null) {
-            RoadManager.INSTANCE = new RoadManager();
-        }
-        return RoadManager.INSTANCE;
+        this.graph = new SimpleDirectedWeightedGraph<>(RoadWay.class);
+        this.common = common;
     }
 
     public boolean addRoadNode(RoadNode node) {
         boolean res = graph.addVertex(node);
         if (res) {
-            System.out.printf("Added node %s\n", node);
+            common.log_debug(String.format("Added node %s\n", node));
         }
         return res;
     }
@@ -44,7 +47,7 @@ public class RoadManager {
     public boolean removeNode(RoadNode node) {
         boolean res = graph.removeVertex(node);
         if (res) {
-            System.out.printf("Removed node %s\n", node);
+            common.log_debug(String.format("Removed node %s\n", node));
         }
         return res;
     }
@@ -62,7 +65,7 @@ public class RoadManager {
     public RoadWay connectNodes(RoadNode source, RoadNode destination) {
         RoadWay edge = graph.addEdge(source, destination);
         graph.setEdgeWeight(edge, source.getPosition().distanceTo(destination.getPosition()));
-        System.out.printf("Connected nodes %s, %s\n", source, destination);
+        common.log_debug(String.format("Connected nodes %s, %s\n", source, destination));
         return edge;
     }
 
@@ -74,5 +77,26 @@ public class RoadManager {
 
     public Graph<RoadNode, RoadWay> getGraph() {
         return graph;
+    }
+
+    public void save() {
+        try {
+            Files.createDirectories(SAVE_PATH);
+            File roads = SAVE_PATH.resolve("graph.json").toFile();
+            roads.createNewFile();
+
+            final var jsonExporter = new JSONExporter<RoadNode, RoadWay>();
+            jsonExporter.exportGraph(graph, roads);        
+        } catch (IOException e) {
+            common.log_warn(e.getMessage());
+        }
+    }
+
+    public void load() {
+        File roads = SAVE_PATH.resolve("graph.json").toFile();
+        if (roads.exists()) {
+            final var jsonImporter = new JSONImporter<RoadNode, RoadWay>();
+            jsonImporter.importGraph(graph, roads);
+        }
     }
 }

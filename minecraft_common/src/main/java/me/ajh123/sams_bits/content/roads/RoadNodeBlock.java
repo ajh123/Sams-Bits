@@ -1,5 +1,6 @@
 package me.ajh123.sams_bits.content.roads;
 
+import me.ajh123.sams_bits.SamsBitsCommon;
 import me.ajh123.sams_bits.content.registry.ModBlocks;
 import me.ajh123.sams_bits.content.registry.ModComponents;
 import me.ajh123.sams_bits.content.registry.ModItems;
@@ -62,7 +63,8 @@ public class RoadNodeBlock extends Block {
     protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         if (state.getBlock() != newState.getBlock()) {
             if (!world.isClient) {
-                RoadManager.getInstance().removeNode(new Position(pos.getX(), pos.getY(), pos.getZ()));
+                SamsBitsCommon common = SamsBitsCommon.getInstance();
+                common.getRoadManager().removeNode(new Position(pos.getX(), pos.getY(), pos.getZ()));
             }
         }
         super.onStateReplaced(state, world, pos, newState, moved);
@@ -72,16 +74,19 @@ public class RoadNodeBlock extends Block {
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos,
             PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
+            SamsBitsCommon common = SamsBitsCommon.getInstance();
+            RoadManager roadManager = common.getRoadManager();
+
             Position position = new Position(pos.getX(), pos.getY(), pos.getZ());
-            RoadManager.getInstance().addRoadNode(position);
+            roadManager.addRoadNode(position);
             if (stack.getItem() instanceof RoadConnectorItem) {
-                RoadNode node = RoadManager.getInstance().getNode(position);
+                RoadNode node = roadManager.getNode(position);
                 LinkingComponent linking = stack.getOrDefault(ModComponents.LINKING_COMPONENT, LinkingComponent.empty());
                 if (linking.getSource() == null) {
                     linking.setSource(new Position(node.getPosition()));
                     stack.set(ModComponents.LINKING_COMPONENT, linking);
                 } else {
-                    RoadManager.getInstance().connectNodes(linking.getSource(), node.getPosition());
+                    roadManager.connectNodes(linking.getSource(), node.getPosition());
                     linking.setSource(null);
                     stack.set(ModComponents.LINKING_COMPONENT, null);
                 }

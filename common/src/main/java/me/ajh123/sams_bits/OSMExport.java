@@ -1,6 +1,5 @@
 package me.ajh123.sams_bits;
 
-import de.topobyte.osm4j.core.model.impl.Node;
 import de.topobyte.osm4j.core.model.impl.Way;
 import de.topobyte.osm4j.xml.output.OsmXmlOutputStream;
 import me.ajh123.sams_bits.roads.RoadManager;

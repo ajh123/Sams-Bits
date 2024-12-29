@@ -13,6 +13,7 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation("org.jgrapht:jgrapht-core:${jgrapht_version}")
+    implementation("org.jgrapht:jgrapht-io:${jgrapht_version}")
     implementation("de.topobyte:osm4j-core:1.3.0")
     implementation("de.topobyte:osm4j-xml:1.3.0")
     implementation("de.topobyte:osm4j-pbf:1.3.0")
