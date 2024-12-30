@@ -1,6 +1,8 @@
 package me.ajh123.sams_bits.roads;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.jgrapht.Graph;
@@ -15,6 +17,7 @@ public class RoadManager {
     private Path save_path = Path.of(".");
     private final SamsBitsCommon common;
     private final Graph<RoadNode, RoadWay> graph;
+    private List<RoadNode> toDelete = new ArrayList<>();
 
     public RoadManager(SamsBitsCommon common) {
         this.graph = new SimpleDirectedWeightedGraph<>(RoadWay.class);
@@ -51,6 +54,8 @@ public class RoadManager {
         }
         boolean res = graph.removeVertex(node);
         node.setDelated(true);
+        toDelete.add(node);
+
         if (res) {
             common.log_debug(String.format("Removed node %s\n", node));
         }
@@ -59,6 +64,10 @@ public class RoadManager {
 
     public boolean removeNode(Position position) {
         return removeNode(getNode(position));
+    }
+
+    public List<RoadNode> toDelete() {
+        return this.toDelete;
     }
 
     public RoadNode getNode(Position pos) {

@@ -27,6 +27,7 @@ public abstract class Exporter {
     }
 
     protected abstract void write(RoadNode node);
+    protected abstract void delete(RoadNode node);
     protected abstract void write(RoadWay way);
     protected abstract void complete();
     
@@ -35,6 +36,10 @@ public abstract class Exporter {
 
         try {
             try {
+                for (RoadNode node : manager.toDelete()) {
+                    this.delete(node);
+                }
+
                 for (RoadNode osmNode : graph.vertexSet()) {
                     this.write(osmNode);
                 }

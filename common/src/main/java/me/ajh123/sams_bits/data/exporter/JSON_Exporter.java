@@ -60,4 +60,14 @@ public class JSON_Exporter extends Exporter {
     protected void complete() {
         // For JSON, this method does not need to do anything.
     }
+
+    @Override
+    protected void delete(RoadNode node) {
+        try {
+            File file = this.getSavePath().resolve("nodes").resolve(String.valueOf(node.getId())+".json").toFile();
+            file.delete();
+        } catch (Exception e) {
+            SamsBitsCommon.INSTANCE.log_warn(e.getMessage());
+        }
+    }
 }

@@ -67,4 +67,9 @@ public class OSM_XML_Exporter extends Exporter {
             SamsBitsCommon.INSTANCE.log_warn(e.getMessage());
         }
     }
+
+    @Override
+    protected void delete(RoadNode node) {
+        // Method does not need to do anything for OSM.
+    }
 }
