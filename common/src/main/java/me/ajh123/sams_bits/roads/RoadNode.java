@@ -9,6 +9,7 @@ public class RoadNode {
     public static long nextId = 0;
     private long id;
     private Position position;
+    private boolean deleted = false;
 
     public RoadNode() {
         // Empty constructor for Jackson
@@ -64,5 +65,13 @@ public class RoadNode {
         long lat = -position.getZ();
         long lon = position.getX();
         return new Node(id, lon, lat);
+    }
+
+    public boolean isDeleted() {
+        return this.deleted;
+    }
+
+    public void setDelated(boolean deleted) {
+        this.deleted = deleted;
     }
 }

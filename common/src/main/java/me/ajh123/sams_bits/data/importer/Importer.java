@@ -9,25 +9,31 @@ import me.ajh123.sams_bits.roads.RoadWay;
 
 public abstract class Importer {
     private Path load_path;
+    private RoadManager manager;
 
-    protected Importer(Path load_path) {
+    protected Importer(Path load_path, RoadManager manager) {
         this.load_path = load_path;
+        this.manager = manager;
     }
 
     protected Path getLoadPath() {
         return this.load_path;
     }
 
-    protected abstract void importNodes(RoadManager manager);
-    protected abstract void importWays(RoadManager manager);
+    protected RoadManager getRoadManager() {
+        return this.manager;
+    }
+
+    protected abstract void importNodes();
+    protected abstract void importWays();
     protected abstract void complete();
     
-    public void importData(RoadManager manager) {
+    public void importData() {
         try {
             try {
-                importNodes(manager);
+                importNodes();
                 RoadNode.nextId = manager.getGraph().vertexSet().size() + 1;
-                importWays(manager);
+                importWays();
                 RoadWay.nextId = manager.getGraph().edgeSet().size() + 1;
             } finally {
                 complete();

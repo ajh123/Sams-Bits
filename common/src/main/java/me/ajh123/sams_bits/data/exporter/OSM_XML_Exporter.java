@@ -18,10 +18,9 @@ import me.ajh123.sams_bits.roads.RoadWay;
 public class OSM_XML_Exporter extends Exporter {
     private FileOutputStream fos;
     private OsmXmlOutputStream osmOutput;
-    private RoadManager manager;
 
-    public OSM_XML_Exporter(Path save_path) {
-        super(save_path);
+    public OSM_XML_Exporter(Path save_path, RoadManager manager) {
+        super(save_path, manager);
 
         try {
             Files.createDirectories(save_path.getParent());
@@ -38,12 +37,14 @@ public class OSM_XML_Exporter extends Exporter {
 
     @Override
     protected void write(RoadNode node) {
-        osmOutput.write(node.toOSMNode());
+        if (!node.isDeleted()) {
+            osmOutput.write(node.toOSMNode());
+        }
     }
 
     @Override
     protected void write(RoadWay way) {
-        var graph = manager.getGraph();
+        var graph = getRoadManager().getGraph();
         TLongArrayList nodeIds = new TLongArrayList();
         
         // Get the source and target nodes and add their IDs
@@ -54,12 +55,6 @@ public class OSM_XML_Exporter extends Exporter {
         Way osmWay = new Way(way.getId(), nodeIds);
         osmWay.setTags(way.OSMTags());
         osmOutput.write(osmWay);
-    }
-
-    @Override
-    public void export(RoadManager manager) {
-        this.manager = manager;
-        super.export(manager);
     }
 
     @Override

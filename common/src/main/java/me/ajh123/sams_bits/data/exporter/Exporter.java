@@ -11,20 +11,26 @@ import me.ajh123.sams_bits.roads.RoadWay;
 
 public abstract class Exporter {
     private Path save_path;
+    private RoadManager manager;
 
-    protected Exporter(Path save_path) {
+    protected Exporter(Path save_path, RoadManager manager) {
         this.save_path = save_path;
+        this.manager = manager;
     }
 
     protected Path getSavePath() {
         return this.save_path;
     }
 
+    protected RoadManager getRoadManager() {
+        return this.manager;
+    }
+
     protected abstract void write(RoadNode node);
     protected abstract void write(RoadWay way);
     protected abstract void complete();
     
-    public void export(RoadManager manager) {
+    public void export() {
         Graph<RoadNode, RoadWay> graph = manager.getGraph();
 
         try {

@@ -10,5 +10,6 @@
   "interaction.road_node.linked": "Road Node %d connected to Road Node %d.",
   "interaction.road_node.link_loop": "Cannot connect Road Node to itself!",
   "interaction.road_node.already_linked": "Road Nodes are already linked!",
-  "interaction.road_node.not_defined": "This Road Node is not defined, try creating a link first."
+  "interaction.road_node.not_defined": "This Road Node is not defined, try creating a link first.",
+  "interaction.road_node.invalid_nodes": "The nodes are invalid! Try replacing them.."
 }

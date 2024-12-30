@@ -14,13 +14,13 @@ import me.ajh123.sams_bits.roads.RoadWay;
 public class JSON_Importer extends Importer {
     private ObjectMapper objectMapper;
 
-    public JSON_Importer(Path load_path) {
-        super(load_path);
+    public JSON_Importer(Path load_path, RoadManager manager) {
+        super(load_path, manager);
         this.objectMapper = new ObjectMapper();
     }
 
     @Override
-    protected void importNodes(RoadManager manager) {
+    protected void importNodes() {
         File nodesDir = this.getLoadPath().resolve("nodes").toFile();
         if (!nodesDir.exists()) {
             SamsBitsCommon.INSTANCE.log_warn("Directory for nodes does not exist.");
@@ -32,9 +32,13 @@ public class JSON_Importer extends Importer {
                 if (nodeFile.isFile()) {
                     RoadNode node = readRoadNode(nodeFile);
                     if (node != null) {
-                        // Add the node to the graph directly
-                        manager.getGraph().addVertex(node);
-                        SamsBitsCommon.INSTANCE.log_debug(String.format("Added node %s\n", node));
+                        if (!node.isDeleted()) {
+                            // Add the node to the graph directly
+                            getRoadManager().getGraph().addVertex(node);
+                            SamsBitsCommon.INSTANCE.log_debug(String.format("Added node %s\n", node));
+                        } else {
+                            nodeFile.delete();
+                        }
                     }
                 }
             }
@@ -44,7 +48,7 @@ public class JSON_Importer extends Importer {
     }
 
     @Override
-    protected void importWays(RoadManager manager) {
+    protected void importWays() {
         File waysDir = this.getLoadPath().resolve("ways").toFile();
         if (!waysDir.exists()) {
             SamsBitsCommon.INSTANCE.log_warn("Directory for ways does not exist.");
@@ -56,11 +60,15 @@ public class JSON_Importer extends Importer {
                 if (wayFile.isFile()) {
                     RoadWay way = readRoadWay(wayFile);
                     if (way != null) {
-                        RoadNode source = manager.getNode(way.source_id);
-                        RoadNode target = manager.getNode(way.target_id);
+                        RoadNode source = getRoadManager().getNode(way.source_id);
+                        RoadNode target = getRoadManager().getNode(way.target_id);
 
-                        manager.getGraph().addEdge(source, target, way);
-                        SamsBitsCommon.INSTANCE.log_debug(String.format("Added way %s\n", way));
+                        if (source.isDeleted() || target.isDeleted()) {
+                            wayFile.delete();
+                        } else {
+                            getRoadManager().getGraph().addEdge(source, target, way);
+                            SamsBitsCommon.INSTANCE.log_debug(String.format("Added way %s\n", way));
+                        }
                     }
                 }
             }

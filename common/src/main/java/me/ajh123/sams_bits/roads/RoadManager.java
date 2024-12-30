@@ -17,7 +17,6 @@ public class RoadManager {
     private final Graph<RoadNode, RoadWay> graph;
 
     public RoadManager(SamsBitsCommon common) {
-        //disable instantiation
         this.graph = new SimpleDirectedWeightedGraph<>(RoadWay.class);
         this.common = common;
     }
@@ -51,6 +50,7 @@ public class RoadManager {
             return false;
         }
         boolean res = graph.removeVertex(node);
+        node.setDelated(true);
         if (res) {
             common.log_debug(String.format("Removed node %s\n", node));
         }
@@ -107,12 +107,12 @@ public class RoadManager {
     }
 
     public void save() {
-        JSON_Exporter exporter = new JSON_Exporter(this.save_path);
-        exporter.export(this);
+        JSON_Exporter exporter = new JSON_Exporter(this.save_path, this);
+        exporter.export();
     }
 
     public void load() {
-        JSON_Importer importer = new JSON_Importer(this.save_path);
-        importer.importData(this);
+        JSON_Importer importer = new JSON_Importer(this.save_path, this);
+        importer.importData();
     }
 }

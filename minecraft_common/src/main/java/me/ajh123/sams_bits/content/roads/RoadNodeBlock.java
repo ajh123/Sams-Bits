@@ -1,5 +1,7 @@
 package me.ajh123.sams_bits.content.roads;
 
+import com.mojang.serialization.MapCodec;
+
 import me.ajh123.sams_bits.SamsBits;
 import me.ajh123.sams_bits.content.registry.ModBlocks;
 import me.ajh123.sams_bits.content.registry.ModComponents;
@@ -10,7 +12,9 @@ import me.ajh123.sams_bits.roads.RoadNode;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -27,7 +31,7 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class RoadNodeBlock extends Block {
+public class RoadNodeBlock extends BlockWithEntity {
     public RoadNodeBlock(Block.Settings settings) {
         super(settings);
     }
@@ -69,7 +73,28 @@ public class RoadNodeBlock extends Block {
         if (state.getBlock() != newState.getBlock()) {
             if (!world.isClient) {
                 RoadManager roadManager = SamsBits.getRoadManager((ServerWorld) world);
-                roadManager.removeNode(new Position(pos.getX(), pos.getY(), pos.getZ()));
+
+                RoadNode node = roadManager.getNode(new Position(pos.getX(), pos.getY(), pos.getZ()));
+                RoadNodeBlockEntity be = getEntity(world, node);
+                
+                for (long sourceI : be.getSources()) {
+                    RoadNode source = roadManager.getNode(sourceI);
+                    RoadNodeBlockEntity sE = getEntity(world, source);
+                    if (sE == null) {
+                        continue;
+                    }
+                    sE.removeDestination(node);
+                }
+                for (long destinationI : be.getDestinations()) {
+                    RoadNode destination = roadManager.getNode(destinationI);
+                    RoadNodeBlockEntity dE = getEntity(world, destination);
+                    if (dE == null) {
+                        continue;
+                    }
+                    dE.removeSource(node);
+                }
+
+                roadManager.removeNode(node);
             }
         }
         super.onStateReplaced(state, world, pos, newState, moved);
@@ -123,7 +148,20 @@ public class RoadNodeBlock extends Block {
                             stack.set(ModComponents.LINKING_COMPONENT, null);
                             return ItemActionResult.FAIL;
                         }
+
+                        RoadNodeBlockEntity sE = getEntity(world, source);
+                        RoadNodeBlockEntity dE = getEntity(world, node);
+
+                        if (sE == null || dE == null) {
+                            player.sendMessage(Text.translatable("interaction.road_node.invalid_nodes").formatted(Formatting.RED), true);
+                            return ItemActionResult.FAIL;
+                        }
+
+                        sE.addDestination(node);
+                        dE.addSource(source);
+
                         var way = roadManager.connectNodes(linking.getSource(), node.getPosition());
+
                         if (way == null) {
                             player.sendMessage(Text.translatable("interaction.road_node.already_linked").formatted(Formatting.RED), true);
                             return ItemActionResult.FAIL;
@@ -140,5 +178,29 @@ public class RoadNodeBlock extends Block {
             }
         }
         return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new RoadNodeBlockEntity(pos, state);
+    }
+
+    @Override
+    protected MapCodec<? extends BlockWithEntity> getCodec() {
+        return createCodec(RoadNodeBlock::new);
+    }
+
+    private static RoadNodeBlockEntity getEntity(World world, RoadNode node) {
+        if (node == null) {
+            return null;
+        }
+
+        Position position = node.getPosition();
+        BlockEntity entity = world.getBlockEntity(new BlockPos(position.getX(), position.getY(), position.getZ()));
+        if (entity instanceof RoadNodeBlockEntity roadNodeBlockEntity) {
+            return roadNodeBlockEntity;
+        }
+
+        return null;
     }
 }
