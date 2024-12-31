@@ -7,5 +7,6 @@ public class ModContent {
         ModItems.initialize();
         ModEntities.initialize();
         ModBlockEntities.initialize();
+        ModCommands.initialize();
     }
 }
