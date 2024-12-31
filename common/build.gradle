@@ -20,8 +20,6 @@ dependencies {
     implementation("de.topobyte:osm4j-geometry:${osm4j_version}")
     implementation("de.topobyte:osm4j-pbf-full-runtime:${osm4j_version}")
     implementation("com.fasterxml.jackson.core:jackson-databind:${jackson_version}")
-    implementation("com.fasterxml.jackson.core:jackson-core:${jackson_version}")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:${jackson_version}")
 }
 
 test {
