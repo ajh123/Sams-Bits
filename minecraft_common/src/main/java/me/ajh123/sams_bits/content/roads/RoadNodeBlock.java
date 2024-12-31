@@ -78,6 +78,10 @@ public class RoadNodeBlock extends BlockWithEntity {
                 RoadNode node = roadManager.getNode(me);
                 RoadNodeBlockEntity be = getEntity(world, node);
                 
+                if (be == null) {
+                    return;
+                }
+
                 for (BlockPos sourceI : be.getSources()) {
                     Position position = new Position(sourceI.getX(), sourceI.getY(), sourceI.getZ());
                     RoadNode source = roadManager.getNode(position);
