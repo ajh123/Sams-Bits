@@ -74,19 +74,23 @@ public class RoadNodeBlock extends BlockWithEntity {
             if (!world.isClient) {
                 RoadManager roadManager = SamsBits.getRoadManager((ServerWorld) world);
 
-                RoadNode node = roadManager.getNode(new Position(pos.getX(), pos.getY(), pos.getZ()));
+                Position me = new Position(pos.getX(), pos.getY(), pos.getZ());
+                RoadNode node = roadManager.getNode(me);
                 RoadNodeBlockEntity be = getEntity(world, node);
                 
-                for (long sourceI : be.getSources()) {
-                    RoadNode source = roadManager.getNode(sourceI);
+                for (BlockPos sourceI : be.getSources()) {
+                    Position position = new Position(sourceI.getX(), sourceI.getY(), sourceI.getZ());
+                    RoadNode source = roadManager.getNode(position);
                     RoadNodeBlockEntity sE = getEntity(world, source);
                     if (sE == null) {
                         continue;
                     }
                     sE.removeDestination(node);
+                    sE.removeSource(node);
                 }
-                for (long destinationI : be.getDestinations()) {
-                    RoadNode destination = roadManager.getNode(destinationI);
+                for (BlockPos destinationI : be.getDestinations()) {
+                    Position position = new Position(destinationI.getX(), destinationI.getY(), destinationI.getZ());
+                    RoadNode destination = roadManager.getNode(position);
                     RoadNodeBlockEntity dE = getEntity(world, destination);
                     if (dE == null) {
                         continue;

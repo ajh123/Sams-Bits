@@ -104,10 +104,10 @@ public class DataManager {
 			if (blockEntity instanceof RoadNodeBlockEntity rEntity) {
 				status = DataSyncStatus.SUCCESS;
 
-				List<Long> destinations = rEntity.getDestinations();
+				List<BlockPos> destinations = rEntity.getDestinations();
 				responseContent.writeInt(destinations.size());
-				for (long id : destinations) {
-					responseContent.writeLong(id);
+				for (BlockPos id : destinations) {
+					responseContent.writeBlockPos(id);
 				}
 			} else {
 				status = DataSyncStatus.NOT_FOUND;
