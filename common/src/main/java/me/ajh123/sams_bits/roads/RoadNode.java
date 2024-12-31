@@ -17,8 +17,7 @@ public class RoadNode {
         // Empty constructor for Jackson
     }
 
-    public RoadNode(Position position, long id) {
-        this.position = position;
+    public RoadNode(long id) {
         this.id = id;
     }
 

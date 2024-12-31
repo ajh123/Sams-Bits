@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.function.Supplier;
 
 import org.jgrapht.Graph;
 import org.jgrapht.graph.SimpleDirectedWeightedGraph;
@@ -20,7 +21,10 @@ public class RoadManager {
     private List<RoadNode> toDelete = new ArrayList<>();
 
     public RoadManager(SamsBitsCommon common) {
-        this.graph = new SimpleDirectedWeightedGraph<>(RoadWay.class);
+        Supplier<RoadWay> edges = () -> new RoadWay(RoadWay.nextId++);
+        Supplier<RoadNode> nodes = () -> new RoadNode(RoadNode.nextId++);
+
+        this.graph = new SimpleDirectedWeightedGraph<>(nodes, edges);
         this.common = common;
     }
 
@@ -45,7 +49,9 @@ public class RoadManager {
     }
 
     public boolean addRoadNode(Position position) {
-        return addRoadNode(new RoadNode(position, RoadNode.nextId++));
+        RoadNode node = new RoadNode(RoadNode.nextId++);
+        node.setPosition(position);
+        return addRoadNode(node);
     }
 
     public boolean removeNode(RoadNode node) {

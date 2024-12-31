@@ -13,17 +13,15 @@ import de.topobyte.osm4j.core.model.impl.Tag;
 public class RoadWay extends DefaultWeightedEdge {
     public static long nextId = 0;
     private long id;
-    private Map<String, String> tags;
+    private Map<String, String> tags = new HashMap<>();
     public long source_id;
     public long target_id;
 
     public RoadWay() {
         // Empty constructor for Jackson
-        this.tags = new HashMap<>();
     }
 
     public RoadWay(long id) {
-        super();
         this.id = id;
         this.tags.put("highway", "unclassified");
         this.tags.put("name", "Unnamed Road");
