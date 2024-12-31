@@ -2,7 +2,9 @@ package me.ajh123.sams_bits.roads;
 
 import java.util.Objects;
 
+import de.topobyte.osm4j.core.model.impl.Metadata;
 import de.topobyte.osm4j.core.model.impl.Node;
+import me.ajh123.sams_bits.maths.MercatorProjection;
 import me.ajh123.sams_bits.maths.Position;
 
 public class RoadNode {
@@ -62,9 +64,21 @@ public class RoadNode {
     }
 
     public Node toOSMNode() {
-        long lat = -position.getZ();
-        long lon = position.getX();
-        return new Node(id, lon, lat);
+        // Convert Minecraft coordinates to Mercator latitude and longitude
+        double lon = MercatorProjection.minecraftToLongitude(position.getX());
+        double lat = MercatorProjection.minecraftToLatitude(position.getZ());
+
+        Node node = new Node(id, lon, lat);
+        node.setMetadata(new Metadata(
+            1,
+            0L,
+            node.getId(),
+            "null",
+            0L
+        ));
+
+        // Return the OSM node with calculated latitude and longitude
+        return node;
     }
 
     public boolean isDeleted() {

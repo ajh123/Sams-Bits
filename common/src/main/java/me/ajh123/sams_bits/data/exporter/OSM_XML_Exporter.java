@@ -8,6 +8,7 @@ import java.nio.file.Path;
 
 import com.slimjars.dist.gnu.trove.list.array.TLongArrayList;
 
+import de.topobyte.osm4j.core.model.impl.Metadata;
 import de.topobyte.osm4j.core.model.impl.Way;
 import de.topobyte.osm4j.xml.output.OsmXmlOutputStream;
 import me.ajh123.sams_bits.SamsBitsCommon;
@@ -29,7 +30,7 @@ public class OSM_XML_Exporter extends Exporter {
             file.createNewFile();
 
             fos = new FileOutputStream(file);
-            osmOutput = new OsmXmlOutputStream(fos, true);          
+            osmOutput = new OsmXmlOutputStream(fos, true);
         } catch (IOException e) {
             SamsBitsCommon.INSTANCE.log_warn(e.getMessage());
         }
@@ -54,6 +55,15 @@ public class OSM_XML_Exporter extends Exporter {
         // Create a way with the node IDs and associated tags
         Way osmWay = new Way(way.getId(), nodeIds);
         osmWay.setTags(way.OSMTags());
+        
+        osmWay.setMetadata(new Metadata(
+            1,
+            0L,
+            way.getId(),
+            "null",
+            0L
+        ));
+
         osmOutput.write(osmWay);
     }
 
