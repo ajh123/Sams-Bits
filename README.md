@@ -1,11 +1,31 @@
 # Sam's Transport Bits
 
-**Sam's Bits**, the Minecraft mod designed to element transportation add add random other things.
+*formally Sam's Bits*
+
+**Sam's Transport Bits**, the Minecraft mod designed for transportation and other random things.
 
 *While the mod was originally created for personal use, it is publicly available, and more features are planned for future updates.*
 *Stay tuned as this mod continues to grow with more unique integrations and utilities!*
 
-## Feaures
+## Current features
+
+### Road creation system
+
+Place Road Nodes on the ground where you have roads.
+
+Interact a Road Node with a Road Connector to begin linking, interact another Road Node to finish linking.
+
+Destroy Road Nodes to unlink.
+
+Interact and sneak on a Road Node to get information of the node.
+
+### Export to Open Street Map (OSM)
+
+Use the command `/sams_transport osm_export <dimension>` to export the road network to an OSM XML file.
+
+Use your favourite OSM tools for rendering the OSM XML file.
+
+## Upcoming features
 
 - [ ] : Vehicle systems **(In Progress)**
     - [ ] : Automated vehicles **(In Progress)**
