@@ -1,6 +1,7 @@
 package me.ajh123.sams_bits;
 
 import me.ajh123.sams_bits.content.registry.ModContent;
+import me.ajh123.sams_bits.content.registry.network.DataManager;
 import me.ajh123.sams_bits.content.roads.RoadNodeBlock;
 import me.ajh123.sams_bits.roads.RoadManager;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
@@ -52,6 +53,8 @@ public class SamsBits extends SamsBitsCommon implements ModInitializer {
             // Pass to other interactions if conditions are not met
             return ActionResult.PASS;
         });
+
+		DataManager.onInitializeServer();
 	}
 
 	public static String getWorldName(ServerWorld world) {

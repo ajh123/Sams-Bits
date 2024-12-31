@@ -8,6 +8,9 @@ import me.ajh123.sams_bits.roads.RoadNode;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper.WrapperLookup;
 import net.minecraft.util.math.BlockPos;
 
@@ -24,18 +27,22 @@ public class RoadNodeBlockEntity extends BlockEntity {
 
     public void addDestination(RoadNode node) {
         this.destinations.add(node.getId());
+        this.markDirty();
     }
 
     public void removeDestination(RoadNode node) {
         this.destinations.remove(node.getId());
+        this.markDirty();
     }
 
     public void addSource(RoadNode node) {
         this.sources.add(node.getId());
+        this.markDirty();
     }
 
     public void removeSource(RoadNode node) {
         this.sources.remove(node.getId());
+        this.markDirty();
     }
 
     public List<Long> getDestinations() {
@@ -65,5 +72,15 @@ public class RoadNodeBlockEntity extends BlockEntity {
         for (long source : nbt.getLongArray("sources")) {
             sources.add(source);
         }
+    }
+
+    @Override
+    public Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt(WrapperLookup registryLookup) {
+        return createNbt(registryLookup);
     }
 }

@@ -13,5 +13,7 @@ public class SamsBitsClient implements ClientModInitializer {
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
 		EntityRendererRegistry.register(ModEntities.VEHICLE_ENTITY, VehicleEntityRenderer::new);
 		BlockEntityRendererFactories.register(ModBlockEntities.ROAD_NODE, RoadNodeRenderer::new);
+
+		ClientDataManager.onInitializeClient();
 	}
 }
