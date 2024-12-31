@@ -40,7 +40,17 @@ dependencies {
     modRuntimeOnly include("eu.pb4:polymer-bundled:${polymer_core_version}")
     modImplementation include("eu.pb4:sgui:${sgui_version}")
     include(modImplementation("me.lucko:fabric-permissions-api:${fabric_permissions_api_version}"))
+
     include(implementation("org.jgrapht:jgrapht-core:${jgrapht_version}"))
+    include(implementation("org.jgrapht:jgrapht-io:${jgrapht_version}"))
+    include(implementation("de.topobyte:osm4j-core:${osm4j_version}"))
+    include(implementation("de.topobyte:osm4j-xml:${osm4j_version}"))
+    include(implementation("de.topobyte:osm4j-pbf:${osm4j_version}"))
+    include(implementation("de.topobyte:osm4j-geometry:${osm4j_version}"))
+    include(implementation("de.topobyte:osm4j-pbf-full-runtime:${osm4j_version}"))
+    include(implementation("com.fasterxml.jackson.core:jackson-databind:${jackson_version}"))
+    include(implementation("com.fasterxml.jackson.core:jackson-core:${jackson_version}"))
+    include(implementation("com.fasterxml.jackson.core:jackson-annotations:${jackson_version}"))
 
     include(implementation(project(":common")))
 }
