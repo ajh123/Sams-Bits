@@ -2,7 +2,7 @@
 
 *formally Sam's Bits*
 
-**Sam's Transport Bits**, the Minecraft mod designed for transportation and other random things.
+**Sam's Transport Bits**, design your own road network and export to Open Street Map. Vehicles coming soon!
 
 *While the mod was originally created for personal use, it is publicly available, and more features are planned for future updates.*
 *Stay tuned as this mod continues to grow with more unique integrations and utilities!*
@@ -28,8 +28,8 @@ Use your favourite OSM tools for rendering the OSM XML file.
 ## Upcoming features
 
 - [ ] : Vehicle systems **(In Progress)**
-    - [ ] : Automated vehicles **(In Progress)**
-    - [ ] : Player driven vehicles
+    - [ ] : Automated vehicles
+    - [ ] : Player driven vehicles **(In Progress)**
 
 ## License
 

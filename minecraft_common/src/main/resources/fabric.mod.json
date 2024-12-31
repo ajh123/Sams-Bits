@@ -3,7 +3,7 @@
 	"id": "sams_bits",
 	"version": "${version}",
 	"name": "Sam's Transport Bits",
-	"description": "**Sam's Transport Bits**, the Minecraft mod designed for transportation and other random things..",
+	"description": "**Sam's Transport Bits**, design your own road network and export to Open Street Map. Vehicles coming soon!",
 	"authors": [
 		"ajh123 (samuelh2005)"
 	],
